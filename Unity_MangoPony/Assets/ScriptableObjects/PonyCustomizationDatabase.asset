@@ -1,0 +1,293 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94ef8da0f9101794aa94a2e21f5c3795, type: 3}
+  m_Name: PonyCustomizationDatabase
+  m_EditorClassIdentifier: Assembly-CSharp::MangoPony.Customization.PonyCustomizationDatabase
+  bodyMeshes:
+  - displayName: Classique
+    icon: {fileID: 0}
+    description: 
+    type: 0
+    prefab: {fileID: 5255561712077989800, guid: aea7d67fbed6d2143816e4bb5c523b4f, type: 3}
+  - displayName: Trait
+    icon: {fileID: 0}
+    description: 
+    type: 1
+    prefab: {fileID: 3348602693624024100, guid: 04c647a2c6ad8a5438475407045e2caf, type: 3}
+  - displayName: Arabe
+    icon: {fileID: 0}
+    description: 
+    type: 2
+    prefab: {fileID: 1169844630218002131, guid: 834ded1630018ac4c881739a47e8672a, type: 3}
+  headMeshes:
+  - displayName: Plate
+    icon: {fileID: 0}
+    description: 
+    type: 0
+    prefab: {fileID: 5267733573997023335, guid: 5677fff8459c41a43b29562c6699aed4, type: 3}
+  - displayName: Bombee
+    icon: {fileID: 0}
+    description: 
+    type: 1
+    prefab: {fileID: 5890999233914341841, guid: c9ef2c0f294bb6e42a5003e0e632ed97, type: 3}
+  - displayName: Creuse
+    icon: {fileID: 0}
+    description: 
+    type: 2
+    prefab: {fileID: 2567971169863557865, guid: 3f405cb75bb9e68499b0ad6d842a1b6c, type: 3}
+  hoofMeshes:
+  - displayName: Classiques
+    icon: {fileID: 0}
+    description: 
+    type: 0
+    prefab: {fileID: 520841010715550463, guid: 3ccd391ee3edb3a4fa6c1d47bbdc27f0, type: 3}
+  - displayName: Fendus
+    icon: {fileID: 0}
+    description: 
+    type: 1
+    prefab: {fileID: 394816894928922137, guid: 873279b1b7f6ae64a81ed6c22e066298, type: 3}
+  - displayName: Fanons
+    icon: {fileID: 0}
+    description: 
+    type: 2
+    prefab: {fileID: 4331820993156706501, guid: 1a9bffc23c4065648ae41c8dd88319a9, type: 3}
+  maneMeshes:
+  - displayName: None
+    icon: {fileID: 0}
+    description: 
+    type: 0
+    prefab: {fileID: 0}
+  - displayName: Classique
+    icon: {fileID: 0}
+    description: 
+    type: 1
+    prefab: {fileID: 7294722866115003109, guid: 6af288c40bf1f2c42b33d2b817bf463c, type: 3}
+  - displayName: Brosse
+    icon: {fileID: 0}
+    description: 
+    type: 2
+    prefab: {fileID: 663555772976636177, guid: 3f8f8654ef74d0245999a0b4f918ebf5, type: 3}
+  - displayName: Tresse
+    icon: {fileID: 0}
+    description: 
+    type: 3
+    prefab: {fileID: 2211509692440333529, guid: 8e77c3e2bfb495c46b31f8dc8ed5e732, type: 3}
+  - displayName: Wavy
+    icon: {fileID: 0}
+    description: 
+    type: 4
+    prefab: {fileID: 5170043529011977560, guid: 35d28ba28e305c14eafd92c4b3ce71ea, type: 3}
+  - displayName: Sauvage
+    icon: {fileID: 0}
+    description: 
+    type: 5
+    prefab: {fileID: 7900694408055846193, guid: b24bb21304bdfa4429c27863eed1bfdc, type: 3}
+  tailMeshes:
+  - displayName: None
+    icon: {fileID: 0}
+    description: 
+    type: 0
+    prefab: {fileID: 0}
+  - displayName: Classique
+    icon: {fileID: 0}
+    description: 
+    type: 1
+    prefab: {fileID: 2558108519146855687, guid: b562856454e3e4640b908ffb38220df4, type: 3}
+  - displayName: Licorne
+    icon: {fileID: 0}
+    description: 
+    type: 2
+    prefab: {fileID: 5062867824010653746, guid: c9643b02e123c72479b2d1e11929691d, type: 3}
+  - displayName: Tresses
+    icon: {fileID: 0}
+    description: 
+    type: 3
+    prefab: {fileID: 4313702698930584196, guid: 24c44162b52f56449984312a52e02126, type: 3}
+  - displayName: Sirene
+    icon: {fileID: 0}
+    description: 
+    type: 4
+    prefab: {fileID: 2886782006282111346, guid: 35e945348cb7c2640a3d1ac0f082994f, type: 3}
+  - displayName: Wavy
+    icon: {fileID: 0}
+    description: 
+    type: 5
+    prefab: {fileID: 7439109741095245200, guid: 9b624953c2a515e40bdf2f66a782551a, type: 3}
+  hornMeshes:
+  - displayName: None
+    icon: {fileID: 0}
+    description: 
+    type: 0
+    prefab: {fileID: 0}
+  - displayName: Droite
+    icon: {fileID: 0}
+    description: 
+    type: 1
+    prefab: {fileID: 2625141406832726654, guid: 6928f66eb7b89aa4da038bfe14dd4013, type: 3}
+  - displayName: Courbee
+    icon: {fileID: 0}
+    description: 
+    type: 2
+    prefab: {fileID: 1777948874886539092, guid: cd2d865568d216b4582e43ace4246206, type: 3}
+  - displayName: Rhino
+    icon: {fileID: 0}
+    description: 
+    type: 3
+    prefab: {fileID: 9001533420777476437, guid: 95b4a3ae83268bb4b8a81647ff0be8b5, type: 3}
+  - displayName: Chevre
+    icon: {fileID: 0}
+    description: 
+    type: 4
+    prefab: {fileID: 4658960706254236628, guid: a81ddfa21ab1d644ba4874df44d265da, type: 3}
+  - displayName: Cerf
+    icon: {fileID: 0}
+    description: 
+    type: 5
+    prefab: {fileID: 3267856160239210022, guid: 286b136ee0ce085429010edc352fa213, type: 3}
+  - displayName: Bouc
+    icon: {fileID: 0}
+    description: 
+    type: 6
+    prefab: {fileID: 1165247570368949055, guid: 8115f0df5ff7de24a9954159bc73d1b3, type: 3}
+  wingMeshes:
+  - displayName: None
+    icon: {fileID: 0}
+    description: 
+    type: 0
+    prefab: {fileID: 0}
+  - displayName: Plumes
+    icon: {fileID: 0}
+    description: 
+    type: 1
+    prefab: {fileID: 166172788031432223, guid: ed5831c737f85d5408820cb0739dfc44, type: 3}
+  - displayName: Dragon
+    icon: {fileID: 0}
+    description: 
+    type: 2
+    prefab: {fileID: 5676082124248612038, guid: 4e7582e14ff957f4a9c4302d862c7f0a, type: 3}
+  - displayName: Mini
+    icon: {fileID: 0}
+    description: 
+    type: 3
+    prefab: {fileID: 518455605052451721, guid: 8b17ad9a7f5fccd4db25302093ac9d5d, type: 3}
+  faceMarkTextures:
+  - displayName: None
+    icon: {fileID: 0}
+    description: 
+    type: 0
+    maskTexture: {fileID: 0}
+  - displayName: Etoile
+    icon: {fileID: 0}
+    description: 
+    type: 1
+    maskTexture: {fileID: 2800000, guid: 7842dfd025c2ba44593f410c1390a275, type: 3}
+  - displayName: Pelote
+    icon: {fileID: 0}
+    description: 
+    type: 2
+    maskTexture: {fileID: 2800000, guid: 9ae30bb87bc024d4a8a126d377604a91, type: 3}
+  - displayName: ListeFine
+    icon: {fileID: 0}
+    description: 
+    type: 3
+    maskTexture: {fileID: 2800000, guid: 964af7bed669b5249a5e418def681357, type: 3}
+  - displayName: ListeLarge
+    icon: {fileID: 0}
+    description: 
+    type: 4
+    maskTexture: {fileID: 2800000, guid: 52861c0900303a249adabe6b9cdea5c3, type: 3}
+  - displayName: EtoileListee
+    icon: {fileID: 0}
+    description: 
+    type: 5
+    maskTexture: {fileID: 2800000, guid: a94bff70068954745a7aa28ca4439f95, type: 3}
+  legMarkTextures:
+  - displayName: None
+    icon: {fileID: 0}
+    description: 
+    type: 0
+    maskTexture: {fileID: 0}
+  - displayName: Couronne
+    icon: {fileID: 0}
+    description: 
+    type: 1
+    maskTexture: {fileID: 2800000, guid: 208d2344454b20e4290d143838736cc2, type: 3}
+  - displayName: PetiteBalzane
+    icon: {fileID: 0}
+    description: 
+    type: 2
+    maskTexture: {fileID: 2800000, guid: cd842ff3d2001214a8a52f209fe7acf0, type: 3}
+  - displayName: MoyenneBalzane
+    icon: {fileID: 0}
+    description: 
+    type: 3
+    maskTexture: {fileID: 2800000, guid: c4d3f50e96cbd784ab06e0cf97717821, type: 3}
+  - displayName: GrandeBalzane
+    icon: {fileID: 0}
+    description: 
+    type: 4
+    maskTexture: {fileID: 2800000, guid: de52a5a8c83aa2b4588910be8805c67b, type: 3}
+  - displayName: Rayures
+    icon: {fileID: 0}
+    description: 
+    type: 5
+    maskTexture: {fileID: 2800000, guid: 1126591520090cf4b84dba079ccac84b, type: 3}
+  bodyPatternTextures:
+  - displayName: None
+    icon: {fileID: 0}
+    description: 
+    type: 0
+    maskTexture: {fileID: 0}
+  - displayName: Appaloosa
+    icon: {fileID: 0}
+    description: 
+    type: 1
+    maskTexture: {fileID: 2800000, guid: 438028ec536bebb459464ba3e6831700, type: 3}
+  - displayName: MiniTobiano
+    icon: {fileID: 0}
+    description: 
+    type: 2
+    maskTexture: {fileID: 2800000, guid: fcb24b7bb4adbcf40bef0284db528918, type: 3}
+  - displayName: Cape
+    icon: {fileID: 0}
+    description: 
+    type: 3
+    maskTexture: {fileID: 2800000, guid: 177d68c0ca12b0347aee9eeb9d7239e3, type: 3}
+  - displayName: Tobiano
+    icon: {fileID: 0}
+    description: 
+    type: 4
+    maskTexture: {fileID: 2800000, guid: 728f708e4a5d50b428598ad6b6b706ca, type: 3}
+  coatNuanceTextures:
+  - displayName: None
+    icon: {fileID: 0}
+    description: 
+    type: 0
+    maskTexture: {fileID: 0}
+  - displayName: Pommele
+    icon: {fileID: 0}
+    description: 
+    type: 1
+    maskTexture: {fileID: 2800000, guid: 5f8037df2d4a0b54189160b48cebf1ee, type: 3}
+  - displayName: Pangare
+    icon: {fileID: 0}
+    description: 
+    type: 2
+    maskTexture: {fileID: 2800000, guid: 7c1d9309724efd843bcf899ed3d7de04, type: 3}
+  - displayName: Isabelle
+    icon: {fileID: 0}
+    description: 
+    type: 3
+    maskTexture: {fileID: 2800000, guid: 72cc57ee468da544899884b2abe273f4, type: 3}
+  coatColorPresets: []
+  maneColorPresets: []
+  eyeColorPresets: []
