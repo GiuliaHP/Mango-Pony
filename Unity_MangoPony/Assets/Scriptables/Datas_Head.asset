@@ -1,0 +1,110 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a8d94c5408cef44e87c6530c783f808, type: 3}
+  m_Name: Datas_Head
+  m_EditorClassIdentifier: Assembly-CSharp::CustomizationCategoryData
+  categoryName: Head
+  categoryIcon: {fileID: 0}
+  elements:
+  - elementName: Head Shape
+    modificationType: 0
+    targetMeshSlot: 1
+    targetMaterialZone: 2
+    targetBoneName: Bone_Head
+    supportsFourLegsSync: 0
+    shapes:
+    - shapeName: Bombée
+      previewIcon: {fileID: 0}
+      meshPrefab: {fileID: 0}
+      patternTexture: {fileID: 0}
+    - shapeName: Plate
+      previewIcon: {fileID: 0}
+      meshPrefab: {fileID: 0}
+      patternTexture: {fileID: 0}
+    - shapeName: Creuse
+      previewIcon: {fileID: 0}
+      meshPrefab: {fileID: 0}
+      patternTexture: {fileID: 0}
+    colorSettings:
+      hasColors: 0
+      colorButtonPrefab: {fileID: 0}
+      colorPickerPrefab: {fileID: 0}
+      colorChannels: []
+  - elementName: Face Marks
+    modificationType: 1
+    targetMeshSlot: 1
+    targetMaterialZone: 2
+    targetBoneName: Bone_Head
+    supportsFourLegsSync: 0
+    shapes:
+    - shapeName: Aucune
+      previewIcon: {fileID: 0}
+      meshPrefab: {fileID: 0}
+      patternTexture: {fileID: 0}
+    - shapeName: Étoile
+      previewIcon: {fileID: 0}
+      meshPrefab: {fileID: 0}
+      patternTexture: {fileID: 0}
+    - shapeName: Pelote
+      previewIcon: {fileID: 0}
+      meshPrefab: {fileID: 0}
+      patternTexture: {fileID: 0}
+    - shapeName: Liste fine
+      previewIcon: {fileID: 0}
+      meshPrefab: {fileID: 0}
+      patternTexture: {fileID: 0}
+    - shapeName: Liste large
+      previewIcon: {fileID: 0}
+      meshPrefab: {fileID: 0}
+      patternTexture: {fileID: 0}
+    - shapeName: Étoile listée
+      previewIcon: {fileID: 0}
+      meshPrefab: {fileID: 0}
+      patternTexture: {fileID: 0}
+    colorSettings:
+      hasColors: 1
+      colorButtonPrefab: {fileID: 0}
+      colorPickerPrefab: {fileID: 0}
+      colorChannels:
+      - colorName: Face Mark Color
+        shaderPropertyName: _FaceMarkColor
+        defaultColor: {r: 0.98, g: 0.97, b: 0.95, a: 1}
+  - elementName: Eyes
+    modificationType: 3
+    targetMeshSlot: 1
+    targetMaterialZone: 2
+    targetBoneName: Bone_Eyes
+    supportsFourLegsSync: 0
+    shapes:
+    - shapeName: Ronde
+      previewIcon: {fileID: 0}
+      meshPrefab: {fileID: 0}
+      patternTexture: {fileID: 0}
+    - shapeName: Fendue
+      previewIcon: {fileID: 0}
+      meshPrefab: {fileID: 0}
+      patternTexture: {fileID: 0}
+    - shapeName: Étoilée
+      previewIcon: {fileID: 0}
+      meshPrefab: {fileID: 0}
+      patternTexture: {fileID: 0}
+    colorSettings:
+      hasColors: 1
+      colorButtonPrefab: {fileID: 0}
+      colorPickerPrefab: {fileID: 0}
+      colorChannels:
+      - colorName: Iris Color
+        shaderPropertyName: _EyeColor
+        defaultColor: {r: 0.35, g: 0.22, b: 0.14, a: 1}
+      - colorName: Pupil Color
+        shaderPropertyName: _PupilColor
+        defaultColor: {r: 0.08, g: 0.06, b: 0.06, a: 1}

@@ -1,0 +1,149 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a8d94c5408cef44e87c6530c783f808, type: 3}
+  m_Name: Datas_Hair
+  m_EditorClassIdentifier: Assembly-CSharp::CustomizationCategoryData
+  categoryName: Hair
+  categoryIcon: {fileID: 0}
+  elements:
+  - elementName: Mane (Crinière)
+    modificationType: 3
+    targetMeshSlot: 3
+    targetMaterialZone: 7
+    targetBoneName: Bone_Mane
+    supportsFourLegsSync: 0
+    shapes:
+    - shapeName: Classique
+      previewIcon: {fileID: 0}
+      meshPrefab: {fileID: 0}
+      patternTexture: {fileID: 0}
+    - shapeName: Brosse
+      previewIcon: {fileID: 0}
+      meshPrefab: {fileID: 0}
+      patternTexture: {fileID: 0}
+    - shapeName: Tresse
+      previewIcon: {fileID: 0}
+      meshPrefab: {fileID: 0}
+      patternTexture: {fileID: 0}
+    - shapeName: Wavy
+      previewIcon: {fileID: 0}
+      meshPrefab: {fileID: 0}
+      patternTexture: {fileID: 0}
+    - shapeName: Sauvage
+      previewIcon: {fileID: 0}
+      meshPrefab: {fileID: 0}
+      patternTexture: {fileID: 0}
+    - shapeName: Aucune
+      previewIcon: {fileID: 0}
+      meshPrefab: {fileID: 0}
+      patternTexture: {fileID: 0}
+    colorSettings:
+      hasColors: 1
+      colorButtonPrefab: {fileID: 0}
+      colorPickerPrefab: {fileID: 0}
+      colorChannels:
+      - colorName: Mane Main Color
+        shaderPropertyName: _BaseColor
+        defaultColor: {r: 0.22, g: 0.14, b: 0.1, a: 1}
+      - colorName: Mane Pattern Color
+        shaderPropertyName: _PatternColor
+        defaultColor: {r: 0.92, g: 0.78, b: 0.45, a: 1}
+  - elementName: Mane Pattern
+    modificationType: 1
+    targetMeshSlot: 3
+    targetMaterialZone: 7
+    targetBoneName: Bone_Mane
+    supportsFourLegsSync: 0
+    shapes:
+    - shapeName: Aucun
+      previewIcon: {fileID: 0}
+      meshPrefab: {fileID: 0}
+      patternTexture: {fileID: 0}
+    - shapeName: Naturel
+      previewIcon: {fileID: 0}
+      meshPrefab: {fileID: 0}
+      patternTexture: {fileID: 0}
+    - shapeName: Fantaisie
+      previewIcon: {fileID: 0}
+      meshPrefab: {fileID: 0}
+      patternTexture: {fileID: 0}
+    colorSettings:
+      hasColors: 0
+      colorButtonPrefab: {fileID: 0}
+      colorPickerPrefab: {fileID: 0}
+      colorChannels: []
+  - elementName: Tail (Queue)
+    modificationType: 3
+    targetMeshSlot: 4
+    targetMaterialZone: 8
+    targetBoneName: Bone_Tail
+    supportsFourLegsSync: 0
+    shapes:
+    - shapeName: Classique
+      previewIcon: {fileID: 0}
+      meshPrefab: {fileID: 0}
+      patternTexture: {fileID: 0}
+    - shapeName: Licorne
+      previewIcon: {fileID: 0}
+      meshPrefab: {fileID: 0}
+      patternTexture: {fileID: 0}
+    - shapeName: Tresses
+      previewIcon: {fileID: 0}
+      meshPrefab: {fileID: 0}
+      patternTexture: {fileID: 0}
+    - shapeName: Sirène
+      previewIcon: {fileID: 0}
+      meshPrefab: {fileID: 0}
+      patternTexture: {fileID: 0}
+    - shapeName: Wavy
+      previewIcon: {fileID: 0}
+      meshPrefab: {fileID: 0}
+      patternTexture: {fileID: 0}
+    - shapeName: Aucune
+      previewIcon: {fileID: 0}
+      meshPrefab: {fileID: 0}
+      patternTexture: {fileID: 0}
+    colorSettings:
+      hasColors: 1
+      colorButtonPrefab: {fileID: 0}
+      colorPickerPrefab: {fileID: 0}
+      colorChannels:
+      - colorName: Tail Main Color
+        shaderPropertyName: _BaseColor
+        defaultColor: {r: 0.22, g: 0.14, b: 0.1, a: 1}
+      - colorName: Tail Pattern Color
+        shaderPropertyName: _PatternColor
+        defaultColor: {r: 0.92, g: 0.78, b: 0.45, a: 1}
+  - elementName: Tail Pattern
+    modificationType: 1
+    targetMeshSlot: 4
+    targetMaterialZone: 8
+    targetBoneName: Bone_Tail
+    supportsFourLegsSync: 0
+    shapes:
+    - shapeName: Aucun
+      previewIcon: {fileID: 0}
+      meshPrefab: {fileID: 0}
+      patternTexture: {fileID: 0}
+    - shapeName: Naturel
+      previewIcon: {fileID: 0}
+      meshPrefab: {fileID: 0}
+      patternTexture: {fileID: 0}
+    - shapeName: Fantaisie
+      previewIcon: {fileID: 0}
+      meshPrefab: {fileID: 0}
+      patternTexture: {fileID: 0}
+    colorSettings:
+      hasColors: 0
+      colorButtonPrefab: {fileID: 0}
+      colorPickerPrefab: {fileID: 0}
+      colorChannels: []

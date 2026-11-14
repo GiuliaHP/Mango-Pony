@@ -1,0 +1,180 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a8d94c5408cef44e87c6530c783f808, type: 3}
+  m_Name: Datas_Body
+  m_EditorClassIdentifier: Assembly-CSharp::CustomizationCategoryData
+  categoryName: Body
+  categoryIcon: {fileID: 0}
+  elements:
+  - elementName: Body Type
+    modificationType: 3
+    targetMeshSlot: 0
+    targetMaterialZone: 0
+    targetBoneName: Root_Body
+    supportsFourLegsSync: 0
+    shapes:
+    - shapeName: Classique
+      previewIcon: {fileID: 0}
+      meshPrefab: {fileID: 0}
+      patternTexture: {fileID: 0}
+    - shapeName: Trait
+      previewIcon: {fileID: 0}
+      meshPrefab: {fileID: 0}
+      patternTexture: {fileID: 0}
+    - shapeName: Arabe
+      previewIcon: {fileID: 0}
+      meshPrefab: {fileID: 0}
+      patternTexture: {fileID: 0}
+    colorSettings:
+      hasColors: 1
+      colorButtonPrefab: {fileID: 0}
+      colorPickerPrefab: {fileID: 0}
+      colorChannels:
+      - colorName: Coat Main Color
+        shaderPropertyName: _BaseColor
+        defaultColor: {r: 0.76, g: 0.54, b: 0.36, a: 1}
+  - elementName: Hooves
+    modificationType: 3
+    targetMeshSlot: 2
+    targetMaterialZone: 0
+    targetBoneName: Bone_Hooves
+    supportsFourLegsSync: 1
+    shapes:
+    - shapeName: Classiques
+      previewIcon: {fileID: 0}
+      meshPrefab: {fileID: 0}
+      patternTexture: {fileID: 0}
+    - shapeName: Fendus
+      previewIcon: {fileID: 0}
+      meshPrefab: {fileID: 0}
+      patternTexture: {fileID: 0}
+    - shapeName: Fanons
+      previewIcon: {fileID: 0}
+      meshPrefab: {fileID: 0}
+      patternTexture: {fileID: 0}
+    colorSettings:
+      hasColors: 1
+      colorButtonPrefab: {fileID: 0}
+      colorPickerPrefab: {fileID: 0}
+      colorChannels:
+      - colorName: Hooves Color
+        shaderPropertyName: _HoovesColor
+        defaultColor: {r: 0.25, g: 0.22, b: 0.2, a: 1}
+  - elementName: Body Patterns
+    modificationType: 1
+    targetMeshSlot: 0
+    targetMaterialZone: 0
+    targetBoneName: Root_Body
+    supportsFourLegsSync: 0
+    shapes:
+    - shapeName: Aucune
+      previewIcon: {fileID: 0}
+      meshPrefab: {fileID: 0}
+      patternTexture: {fileID: 0}
+    - shapeName: Appaloosa
+      previewIcon: {fileID: 0}
+      meshPrefab: {fileID: 0}
+      patternTexture: {fileID: 0}
+    - shapeName: Mini Tobiano
+      previewIcon: {fileID: 0}
+      meshPrefab: {fileID: 0}
+      patternTexture: {fileID: 0}
+    - shapeName: Capé
+      previewIcon: {fileID: 0}
+      meshPrefab: {fileID: 0}
+      patternTexture: {fileID: 0}
+    - shapeName: Tobiano
+      previewIcon: {fileID: 0}
+      meshPrefab: {fileID: 0}
+      patternTexture: {fileID: 0}
+    colorSettings:
+      hasColors: 1
+      colorButtonPrefab: {fileID: 0}
+      colorPickerPrefab: {fileID: 0}
+      colorChannels:
+      - colorName: Pattern Color
+        shaderPropertyName: _PatternColor
+        defaultColor: {r: 0.96, g: 0.94, b: 0.9, a: 1}
+  - elementName: Coat Nuances
+    modificationType: 1
+    targetMeshSlot: 0
+    targetMaterialZone: 1
+    targetBoneName: Root_Body
+    supportsFourLegsSync: 0
+    shapes:
+    - shapeName: Solid
+      previewIcon: {fileID: 0}
+      meshPrefab: {fileID: 0}
+      patternTexture: {fileID: 0}
+    - shapeName: Pommelé
+      previewIcon: {fileID: 0}
+      meshPrefab: {fileID: 0}
+      patternTexture: {fileID: 0}
+    - shapeName: Pangaré
+      previewIcon: {fileID: 0}
+      meshPrefab: {fileID: 0}
+      patternTexture: {fileID: 0}
+    - shapeName: Isabelle
+      previewIcon: {fileID: 0}
+      meshPrefab: {fileID: 0}
+      patternTexture: {fileID: 0}
+    - shapeName: Moucheté
+      previewIcon: {fileID: 0}
+      meshPrefab: {fileID: 0}
+      patternTexture: {fileID: 0}
+    colorSettings:
+      hasColors: 1
+      colorButtonPrefab: {fileID: 0}
+      colorPickerPrefab: {fileID: 0}
+      colorChannels:
+      - colorName: Nuance Color
+        shaderPropertyName: _NuanceColor
+        defaultColor: {r: 0.88, g: 0.78, b: 0.65, a: 1}
+  - elementName: Leg Marks
+    modificationType: 1
+    targetMeshSlot: 0
+    targetMaterialZone: 3
+    targetBoneName: Bone_Legs
+    supportsFourLegsSync: 1
+    shapes:
+    - shapeName: Aucune
+      previewIcon: {fileID: 0}
+      meshPrefab: {fileID: 0}
+      patternTexture: {fileID: 0}
+    - shapeName: Couronne
+      previewIcon: {fileID: 0}
+      meshPrefab: {fileID: 0}
+      patternTexture: {fileID: 0}
+    - shapeName: Petite balzane
+      previewIcon: {fileID: 0}
+      meshPrefab: {fileID: 0}
+      patternTexture: {fileID: 0}
+    - shapeName: Moyenne balzane
+      previewIcon: {fileID: 0}
+      meshPrefab: {fileID: 0}
+      patternTexture: {fileID: 0}
+    - shapeName: Grande balzane
+      previewIcon: {fileID: 0}
+      meshPrefab: {fileID: 0}
+      patternTexture: {fileID: 0}
+    - shapeName: Rayures
+      previewIcon: {fileID: 0}
+      meshPrefab: {fileID: 0}
+      patternTexture: {fileID: 0}
+    colorSettings:
+      hasColors: 1
+      colorButtonPrefab: {fileID: 0}
+      colorPickerPrefab: {fileID: 0}
+      colorChannels:
+      - colorName: Leg Mark Color
+        shaderPropertyName: _LegMarkColor
+        defaultColor: {r: 0.98, g: 0.97, b: 0.95, a: 1}
