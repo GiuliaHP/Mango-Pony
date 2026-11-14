@@ -1,54 +1,41 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
 
 public class CustomizationUIGenerator : MonoBehaviour
 {
-    [Header("1. Données des Catégories (ScriptableObjects)")]
-    [Tooltip("Liste des catégories à générer dans l'ordre des onglets (Body, Head, Hair, Accessories...)")]
+    [Header("1. Données des Catégories")]
     public List<CustomizationCategoryData> categories = new List<CustomizationCategoryData>();
 
-    [Header("2. Conteneurs cibles dans le Canvas")]
-    [Tooltip("Le parent (HorizontalLayoutGroup) qui recevra les boutons d'onglets")]
+    [Header("2. Conteneurs du Canvas")]
     public Transform tabsContainer;
-
-    [Tooltip("Le parent qui recevra les panneaux de chaque catégorie")]
     public Transform panelsContainer;
 
-    [Header("3. Prefabs de Structure (Onglets, Panneaux, Sections)")]
-    [Tooltip("Prefab du bouton d'onglet (doit contenir un Button, et idéalement un TextMeshProUGUI / Image)")]
+    [Header("3. Prefabs de Structure (Ton orga d'origine)")]
     public GameObject tabButtonPrefab;
-
-    [Tooltip("Prefab du panneau d'une catégorie (ex: ScrollView -> Viewport -> Content)")]
+    [Tooltip("Ton Category Panel Prefab (ScrollView / VerticalLayout)")]
     public GameObject categoryPanelPrefab;
-
-    [Tooltip("Optionnel : Chemin relatif vers le Content du ScrollView dans categoryPanelPrefab (ex: 'Viewport/Content'). Laisser vide si le panel est directement le conteneur.")]
+    [Tooltip("Chemin vers le Content dans le Category Panel Prefab (ex: 'Viewport/Content', laisser vide si racine)")]
     public string panelContentPath = "Viewport/Content";
 
-    [Tooltip("Prefab d'un bloc d'élément (ex: un conteneur vertical pour 'Crinière' avec un titre et une grille)")]
-    public GameObject elementSectionPrefab;
+    [Space(5)]
+    [Tooltip("Prefab du Title (TextMeshProUGUI avec le nom de l'élément)")]
+    public GameObject elementTitlePrefab;
 
-    [Tooltip("Optionnel : Chemin relatif vers la grille de boutons dans elementSectionPrefab (ex: 'ShapesGrid'). Laisser vide pour instancier directement dans la section.")]
-    public string shapesGridPath = "ShapesGrid";
+    [Tooltip("Prefab du Subtitle (TextMeshProUGUI : 'Shapes', 'Patterns', 'Colors')")]
+    public GameObject subtitlePrefab;
 
-    [Tooltip("Optionnel : Chemin relatif vers le conteneur des couleurs dans elementSectionPrefab (ex: 'ColorsContainer'). Laisser vide pour instancier à la suite.")]
-    public string colorsContainerPath = "ColorsContainer";
+    [Tooltip("Prefab de grille (GridLayoutGroup) pour les boutons Shapes et Patterns")]
+    public GameObject gridLayoutPrefab;
 
-    [Header("4. Prefabs de Boutons & Color Picker (Par défaut)")]
-    [Tooltip("Prefab contenant MeshPreviewButton + Button + Image")]
+    [Tooltip("Ton prefab 'Layout_Colors' (contient déjà un layout pour les boutons de couleur)")]
+    public GameObject layoutColorsPrefab;
+
+    [Header("4. Prefabs de Boutons & Color Picker")]
     public GameObject meshPreviewButtonPrefab;
-
-    [Tooltip("Prefab contenant PatternPreviewButton + Button + Image")]
     public GameObject patternPreviewButtonPrefab;
-
-    [Tooltip("Prefab contenant ColorSwatchButton + Button + Image")]
     public GameObject colorSwatchButtonPrefab;
-
-    [Tooltip("Prefab contenant CustomColorWheel")]
     public GameObject colorWheelPrefab;
 
-    [Header("5. Options de Génération")]
-    [Tooltip("Désactive automatiquement tous les panneaux sauf le premier après génération")]
+    [Header("5. Options")]
     public bool hideInactivePanels = true;
 }

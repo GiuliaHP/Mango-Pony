@@ -38,7 +38,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 360}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &4704123157302255125
 MonoBehaviour:
@@ -60,11 +60,10 @@ MonoBehaviour:
   innerRadiusNormalized: 0.78
   handleOrbitNormalized: 0.89
   hueAngleOffset: 90
-  targetZone: 0
-  shaderColorProperty: _BaseColor
   onColorChanged:
     m_PersistentCalls:
       m_Calls: []
+  swatchListContainer: {fileID: 0}
 --- !u!222 &4006193725672542781
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -409,7 +408,7 @@ GameObject:
   - component: {fileID: 8553998490491407818}
   - component: {fileID: 3941602302205527614}
   m_Layer: 5
-  m_Name: Gradient_White
+  m_Name: Gradient_Bottom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -455,7 +454,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -560,7 +559,7 @@ GameObject:
   - component: {fileID: 3216194284940216004}
   - component: {fileID: 3311723705247513088}
   m_Layer: 5
-  m_Name: Gradient_Black
+  m_Name: Gradient_Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

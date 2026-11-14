@@ -11,170 +11,145 @@ public class CustomizationUIGeneratorEditor : Editor
     public override void OnInspectorGUI()
     {
         DrawDefaultInspector();
-
         CustomizationUIGenerator generator = (CustomizationUIGenerator)target;
 
         EditorGUILayout.Space(15);
         GUI.backgroundColor = new Color(0.4f, 0.85f, 0.55f);
         if (GUILayout.Button("Générer l'Interface UI (Hors Play Mode)", GUILayout.Height(40)))
-        {
             GenerateUI(generator);
-        }
 
         GUI.backgroundColor = new Color(0.95f, 0.45f, 0.45f);
         if (GUILayout.Button("Vider l'Interface UI générée", GUILayout.Height(28)))
-        {
             ClearUI(generator);
-        }
+
         GUI.backgroundColor = Color.white;
     }
 
     private void ClearUI(CustomizationUIGenerator gen)
     {
-        if (gen.tabsContainer != null)
-            ClearChildrenImmediate(gen.tabsContainer);
-
-        if (gen.panelsContainer != null)
-            ClearChildrenImmediate(gen.panelsContainer);
-
+        if (gen.tabsContainer != null) ClearChildrenImmediate(gen.tabsContainer);
+        if (gen.panelsContainer != null) ClearChildrenImmediate(gen.panelsContainer);
         EditorUtility.SetDirty(gen.gameObject);
-        Debug.Log("[CustomizationUIGenerator] Interface nettoyée.");
     }
 
     private void ClearChildrenImmediate(Transform parent)
     {
         for (int i = parent.childCount - 1; i >= 0; i--)
-        {
             Undo.DestroyObjectImmediate(parent.GetChild(i).gameObject);
-        }
     }
 
     private void GenerateUI(CustomizationUIGenerator gen)
     {
-        if (gen.tabsContainer == null || gen.panelsContainer == null)
+        if (gen.tabsContainer == null || gen.panelsContainer == null || gen.categoryPanelPrefab == null)
         {
-            Debug.LogError("[CustomizationUIGenerator] Assigne 'tabsContainer' et 'panelsContainer' avant de générer !");
+            Debug.LogError("[Generator] Assigne tabsContainer, panelsContainer et categoryPanelPrefab !");
             return;
         }
 
         Undo.SetCurrentGroupName("Generate Customization UI");
         int undoGroup = Undo.GetCurrentGroup();
-
         ClearUI(gen);
 
         List<GameObject> createdPanels = new List<GameObject>();
 
-        for (int cIndex = 0; cIndex < gen.categories.Count; cIndex++)
+        foreach (var category in gen.categories)
         {
-            CustomizationCategoryData category = gen.categories[cIndex];
             if (category == null) continue;
 
-            // 1. Création de l'onglet
+            // Onglet
             GameObject tabObj = InstantiatePrefabWithUndo(gen.tabButtonPrefab, gen.tabsContainer, $"Tab_{category.categoryName}");
-            if (tabObj != null)
-            {
-                TextMeshProUGUI tabText = tabObj.GetComponentInChildren<TextMeshProUGUI>(true);
-                if (tabText != null) tabText.text = category.categoryName;
+            SetTMPText(tabObj, category.categoryName);
 
-                if (category.categoryIcon != null)
-                {
-                    Image[] images = tabObj.GetComponentsInChildren<Image>(true);
-                    // Si un enfant porte une icône dédiée (souvent le 2e Image après le fond du bouton)
-                    if (images.Length > 1) images[1].sprite = category.categoryIcon;
-                }
-            }
-
-            // 2. Création du panneau de catégorie
+            // Panneau de catégorie
             GameObject panelObj = InstantiatePrefabWithUndo(gen.categoryPanelPrefab, gen.panelsContainer, $"Panel_{category.categoryName}");
-            if (panelObj == null) continue;
             createdPanels.Add(panelObj);
 
-            Transform panelContent = FindChildByPathOrSelf(panelObj.transform, gen.panelContentPath);
+            Transform contentRoot = FindChildByPathOrSelf(panelObj.transform, gen.panelContentPath);
+            // Nettoie les éventuels éléments d'exemple déjà présents dans le prefab
+            ClearChildrenImmediate(contentRoot);
 
-            // 3. Génération de chaque élément de la catégorie
             foreach (var element in category.elements)
             {
-                Transform sectionParent = panelContent;
+                // 1. TITLE (Nom de l'élément)
+                GameObject titleObj = InstantiatePrefabWithUndo(gen.elementTitlePrefab, contentRoot, $"Title_{element.elementName}");
+                SetTMPText(titleObj, element.elementName);
 
-                if (gen.elementSectionPrefab != null)
+                // 2. SUBTITLE + GRID LAYOUT : SHAPES
+                if (element.shapes != null && element.shapes.Count > 0)
                 {
-                    GameObject sectionObj = InstantiatePrefabWithUndo(gen.elementSectionPrefab, panelContent, $"Section_{element.elementName}");
-                    if (sectionObj != null)
-                    {
-                        TextMeshProUGUI sectionTitle = sectionObj.GetComponentInChildren<TextMeshProUGUI>(true);
-                        if (sectionTitle != null) sectionTitle.text = element.elementName;
-                        sectionParent = sectionObj.transform;
-                    }
-                }
+                    GameObject subShapes = InstantiatePrefabWithUndo(gen.subtitlePrefab, contentRoot, $"Subtitle_{element.shapesSubtitle}");
+                    SetTMPText(subShapes, element.shapesSubtitle);
 
-                // 3A. Génération des boutons de Shapes / Motifs
-                if (element.modificationType != CustomizationCategoryData.ElementModificationType.ColorOnly && element.shapes != null)
-                {
-                    Transform shapesGrid = FindChildByPathOrSelf(sectionParent, gen.shapesGridPath);
+                    GameObject gridShapes = InstantiatePrefabWithUndo(gen.gridLayoutPrefab, contentRoot, $"Grid_{element.shapesSubtitle}");
+                    Transform gridParent = gridShapes != null ? gridShapes.transform : contentRoot;
 
                     foreach (var shape in element.shapes)
                     {
-                        bool isMesh = element.modificationType == CustomizationCategoryData.ElementModificationType.MeshOnly ||
-                                      (element.modificationType == CustomizationCategoryData.ElementModificationType.MeshAndMaterial && shape.patternTexture == null && shape.meshPrefab != null) ||
-                                      (element.modificationType == CustomizationCategoryData.ElementModificationType.MeshAndMaterial && shape.meshPrefab == null && shape.patternTexture == null);
-
-                        if (isMesh)
-                        {
-                            CreateMeshButton(gen, shapesGrid, element, shape);
-                        }
-                        else
-                        {
-                            CreatePatternButton(gen, shapesGrid, element, shape);
-                        }
+                        CreateMeshButton(gen, gridParent, element, shape);
                     }
                 }
 
-                // 3B. Génération des boutons de Couleur + CustomColorWheel
-                if (element.colorSettings != null && element.colorSettings.hasColors && element.colorSettings.colorChannels != null && element.colorSettings.colorChannels.Count > 0)
+                // 3. SUBTITLE + GRID LAYOUT : PATTERNS
+                if (element.patterns != null && element.patterns.Count > 0)
                 {
-                    Transform colorsParent = FindChildByPathOrSelf(sectionParent, gen.colorsContainerPath);
+                    GameObject subPatterns = InstantiatePrefabWithUndo(gen.subtitlePrefab, contentRoot, $"Subtitle_{element.patternsSubtitle}");
+                    SetTMPText(subPatterns, element.patternsSubtitle);
 
-                    GameObject swatchPrefab = element.colorSettings.colorButtonPrefab != null
-                        ? element.colorSettings.colorButtonPrefab
-                        : gen.colorSwatchButtonPrefab;
+                    GameObject gridPatterns = InstantiatePrefabWithUndo(gen.gridLayoutPrefab, contentRoot, $"Grid_{element.patternsSubtitle}");
+                    Transform gridParent = gridPatterns != null ? gridPatterns.transform : contentRoot;
 
-                    GameObject wheelPrefab = element.colorSettings.colorPickerPrefab != null
-                        ? element.colorSettings.colorPickerPrefab
-                        : gen.colorWheelPrefab;
+                    foreach (var pattern in element.patterns)
+                    {
+                        CreatePatternButton(gen, gridParent, element, pattern);
+                    }
+                }
 
-                    foreach (var channel in element.colorSettings.colorChannels)
+                // 4. SUBTITLE + LAYOUT_COLORS + COLOR PICKER
+                var colSettings = element.colorSettings;
+                if (colSettings != null && colSettings.hasColors && colSettings.colorChannels != null && colSettings.colorChannels.Count > 0)
+                {
+                    GameObject subColors = InstantiatePrefabWithUndo(gen.subtitlePrefab, contentRoot, $"Subtitle_{element.colorsSubtitle}");
+                    SetTMPText(subColors, element.colorsSubtitle);
+
+                    // Instancie ton Layout_Colors et adapte automatiquement le nombre de boutons de couleur
+                    GameObject colorsLayoutObj = InstantiatePrefabWithUndo(gen.layoutColorsPrefab, contentRoot, $"Layout_Colors_{element.elementName}");
+                    Transform colorsParent = colorsLayoutObj != null ? colorsLayoutObj.transform : contentRoot;
+
+                    // Vide les boutons placeholders du prefab Layout_Colors pour générer le nombre exact requis (1, 2, 3...)
+                    if (colorsLayoutObj != null)
+                        ClearChildrenImmediate(colorsParent);
+
+                    GameObject swatchPrefab = colSettings.colorButtonPrefab != null ? colSettings.colorButtonPrefab : gen.colorSwatchButtonPrefab;
+                    GameObject wheelPrefab = colSettings.colorPickerPrefab != null ? colSettings.colorPickerPrefab : gen.colorWheelPrefab;
+
+                    foreach (var channel in colSettings.colorChannels)
                     {
                         CreateColorSwatchButton(swatchPrefab, colorsParent, element.targetMaterialZone, channel);
                     }
 
-                    // On instancie la roue chromatique juste APRÈS les boutons swatch pour que FindNextColorWheelInHierarchy() la trouve automatiquement !
+                    // 5. COLOR PICKER placé juste après Layout_Colors (trouvé automatiquement par ColorSwatchButton)
                     if (wheelPrefab != null)
                     {
-                        InstantiatePrefabWithUndo(wheelPrefab, colorsParent, $"ColorWheel_{element.elementName}");
+                        InstantiatePrefabWithUndo(wheelPrefab, contentRoot, $"ColorPicker_{element.elementName}");
                     }
                 }
             }
         }
 
-        // Afficher uniquement le 1er panneau par défaut si souhaité
         if (gen.hideInactivePanels)
         {
             for (int i = 0; i < createdPanels.Count; i++)
-            {
                 createdPanels[i].SetActive(i == 0);
-            }
         }
 
         Undo.CollapseUndoOperations(undoGroup);
         EditorUtility.SetDirty(gen.gameObject);
-        Debug.Log($"[CustomizationUIGenerator] Interface générée avec succès ({createdPanels.Count} catégories) !");
     }
 
-    private void CreateMeshButton(CustomizationUIGenerator gen, Transform parent, CustomizationCategoryData.CustomizationElement element, CustomizationCategoryData.ShapeOption shape)
+    private void CreateMeshButton(CustomizationUIGenerator gen, Transform parent, CustomizationCategoryData.CustomizationElement element, CustomizationCategoryData.MeshShapeOption shape)
     {
         if (gen.meshPreviewButtonPrefab == null) return;
-
-        GameObject btnObj = InstantiatePrefabWithUndo(gen.meshPreviewButtonPrefab, parent, $"Btn_Mesh_{shape.shapeName}");
+        GameObject btnObj = InstantiatePrefabWithUndo(gen.meshPreviewButtonPrefab, parent, $"Btn_Shape_{shape.shapeName}");
         ApplyButtonVisuals(btnObj, shape.shapeName, shape.previewIcon);
 
         MeshPreviewButton meshBtn = btnObj.GetComponent<MeshPreviewButton>();
@@ -187,19 +162,18 @@ public class CustomizationUIGeneratorEditor : Editor
         }
     }
 
-    private void CreatePatternButton(CustomizationUIGenerator gen, Transform parent, CustomizationCategoryData.CustomizationElement element, CustomizationCategoryData.ShapeOption shape)
+    private void CreatePatternButton(CustomizationUIGenerator gen, Transform parent, CustomizationCategoryData.CustomizationElement element, CustomizationCategoryData.PatternOption pattern)
     {
         if (gen.patternPreviewButtonPrefab == null) return;
-
-        GameObject btnObj = InstantiatePrefabWithUndo(gen.patternPreviewButtonPrefab, parent, $"Btn_Pattern_{shape.shapeName}");
-        ApplyButtonVisuals(btnObj, shape.shapeName, shape.previewIcon);
+        GameObject btnObj = InstantiatePrefabWithUndo(gen.patternPreviewButtonPrefab, parent, $"Btn_Pattern_{pattern.patternName}");
+        ApplyButtonVisuals(btnObj, pattern.patternName, pattern.previewIcon);
 
         PatternPreviewButton patternBtn = btnObj.GetComponent<PatternPreviewButton>();
         if (patternBtn != null)
         {
             SerializedObject so = new SerializedObject(patternBtn);
             so.FindProperty("targetZone").enumValueIndex = (int)element.targetMaterialZone;
-            so.FindProperty("patternTexture").objectReferenceValue = shape.patternTexture;
+            so.FindProperty("patternTexture").objectReferenceValue = pattern.patternTexture;
             so.FindProperty("applyToAllLegs").boolValue = element.supportsFourLegsSync;
             so.ApplyModifiedPropertiesWithoutUndo();
         }
@@ -208,8 +182,7 @@ public class CustomizationUIGeneratorEditor : Editor
     private void CreateColorSwatchButton(GameObject prefab, Transform parent, Swapper.MaterialZone zone, CustomizationCategoryData.ColorChannel channel)
     {
         if (prefab == null) return;
-
-        GameObject swatchObj = InstantiatePrefabWithUndo(prefab, parent, $"Swatch_{channel.colorName}");
+        GameObject swatchObj = InstantiatePrefabWithUndo(prefab, parent, $"Button_Color_{channel.colorName}");
         ApplyButtonVisuals(swatchObj, channel.colorName, null);
 
         ColorSwatchButton swatchBtn = swatchObj.GetComponent<ColorSwatchButton>();
@@ -221,24 +194,28 @@ public class CustomizationUIGeneratorEditor : Editor
             so.FindProperty("shaderColorProperty").stringValue = channel.shaderPropertyName;
             so.ApplyModifiedPropertiesWithoutUndo();
 
-            // Met à jour la couleur visible immédiatement dans l'éditeur
-            Image img = swatchObj.GetComponent<Image>();
-            if (img != null) img.color = channel.defaultColor;
+            // Met à jour l'Image swatchPreviewImage (ex: ton enfant "Color" dans ton prefab Button_Color)
+            SerializedProperty previewImgProp = so.FindProperty("swatchPreviewImage");
+            if (previewImgProp != null && previewImgProp.objectReferenceValue is Image previewImg)
+                previewImg.color = channel.defaultColor;
         }
+    }
+
+    private void SetTMPText(GameObject obj, string text)
+    {
+        if (obj == null) return;
+        TextMeshProUGUI tmp = obj.GetComponentInChildren<TextMeshProUGUI>(true);
+        if (tmp != null) tmp.text = text;
     }
 
     private void ApplyButtonVisuals(GameObject btnObj, string label, Sprite icon)
     {
-        TextMeshProUGUI tmp = btnObj.GetComponentInChildren<TextMeshProUGUI>(true);
-        if (tmp != null) tmp.text = label;
-
+        SetTMPText(btnObj, label);
         if (icon != null)
         {
             Image[] images = btnObj.GetComponentsInChildren<Image>(true);
-            if (images.Length > 1)
-                images[1].sprite = icon;
-            else if (images.Length == 1)
-                images[0].sprite = icon;
+            if (images.Length > 1) images[1].sprite = icon;
+            else if (images.Length == 1) images[0].sprite = icon;
         }
     }
 

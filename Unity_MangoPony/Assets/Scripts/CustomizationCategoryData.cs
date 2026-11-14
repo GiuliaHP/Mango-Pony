@@ -30,32 +30,41 @@ public class CustomizationCategoryData : ScriptableObject
     [System.Serializable]
     public class CustomizationElement
     {
-        [Header("Informations Générales")]
-        [Tooltip("Nom de l'élément affiché dans l'UI (ex: Crinière, Sabots, Marques du corps...)")]
-        public string elementName;
+        [Header("1. Titre de l'élément")]
+        public string elementName; // Ex: "Crinière", "Corps", "Cornes"
 
-        [Header("Zone & Cibles dans le Swapper")]
-        [Tooltip("Type de modification que pilote cet élément")]
-        public ElementModificationType modificationType = ElementModificationType.MeshAndMaterial;
-
-        [Tooltip("Emplacement de Mesh concerné (si cet élément change un prefab 3D)")]
+        [Header("2. Cibles Swapper")]
         public Swapper.SlotType targetMeshSlot;
-
-        [Tooltip("Zone de Material concernée (si cet élément change un motif ou une couleur)")]
         public Swapper.MaterialZone targetMaterialZone;
-
-        [Tooltip("Nom du Bone / Transform cible (utile pour le debug, l'auto-binding ou le focus caméra)")]
-        public string targetBoneName;
-
-        [Tooltip("Permet d'afficher un toggle 'Appliquer aux 4 pattes' dans l'UI pour cet élément")]
         public bool supportsFourLegsSync = false;
 
-        [Header("Variations / Shapes Associées")]
-        [Tooltip("Liste des formes, meshes ou motifs disponibles pour cet élément")]
-        public List<ShapeOption> shapes = new List<ShapeOption>();
+        [Header("3. Sous-section Shapes (Meshes 3D)")]
+        public string shapesSubtitle = "Shapes";
+        public List<MeshShapeOption> shapes = new List<MeshShapeOption>();
 
-        [Header("Configuration des Couleurs")]
+        [Header("4. Sous-section Patterns (Motifs Shader)")]
+        public string patternsSubtitle = "Patterns";
+        public List<PatternOption> patterns = new List<PatternOption>();
+
+        [Header("5. Sous-section Colors")]
+        public string colorsSubtitle = "Colors";
         public ColorSection colorSettings = new ColorSection();
+    }
+
+    [System.Serializable]
+    public class MeshShapeOption
+    {
+        public string shapeName;
+        public Sprite previewIcon;
+        public GameObject meshPrefab;
+    }
+
+    [System.Serializable]
+    public class PatternOption
+    {
+        public string patternName;
+        public Sprite previewIcon;
+        public Texture patternTexture;
     }
 
     public enum ElementModificationType
