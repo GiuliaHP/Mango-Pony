@@ -53,4 +53,11 @@ public class PatternPreviewButton : MonoBehaviour
             customizerSwapper.SwapPatternTexture(targetZone, patternTexture);
         }
     }
+
+    public void Setup(Swapper.MaterialZone zone, CustomizationCategoryData.PatternOption option, bool syncFourLegs)
+    {
+        targetZone = zone;
+        patternTexture = option.patternTexture;
+        applyToAllLegs = syncFourLegs;
+    }
 }

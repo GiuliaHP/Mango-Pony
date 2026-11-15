@@ -125,4 +125,13 @@ public class ColorSwatchButton : MonoBehaviour
             swapper.SwapZoneColor(targetZone, currentColor, shaderColorProperty);
         }
     }
+
+    public void Setup(Swapper.MaterialZone zone, CustomizationCategoryData.ColorChannel channel)
+    {
+        targetZone = zone;
+        shaderColorProperty = channel.shaderPropertyName;
+        defaultColor = channel.defaultColor;
+        currentColor = defaultColor;
+        UpdateButtonVisual();
+    }
 }

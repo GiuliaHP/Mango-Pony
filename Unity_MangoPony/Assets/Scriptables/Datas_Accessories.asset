@@ -16,40 +16,37 @@ MonoBehaviour:
   categoryIcon: {fileID: 0}
   elements:
   - elementName: Horns (Cornes)
-    modificationType: 3
     targetMeshSlot: 5
     targetMaterialZone: 0
-    targetBoneName: Bone_Horn
     supportsFourLegsSync: 0
+    shapesSubtitle: Shapes
+    defaultShapeIndex: 0
     shapes:
     - shapeName: Aucune
       previewIcon: {fileID: 0}
       meshPrefab: {fileID: 0}
-      patternTexture: {fileID: 0}
     - shapeName: Droite
       previewIcon: {fileID: 0}
-      meshPrefab: {fileID: 0}
-      patternTexture: {fileID: 0}
-    - shapeName: Courbée
+      meshPrefab: {fileID: 2625141406832726654, guid: 6928f66eb7b89aa4da038bfe14dd4013, type: 3}
+    - shapeName: "Courb\xE9e"
       previewIcon: {fileID: 0}
-      meshPrefab: {fileID: 0}
-      patternTexture: {fileID: 0}
+      meshPrefab: {fileID: 1777948874886539092, guid: cd2d865568d216b4582e43ace4246206, type: 3}
     - shapeName: Rhino
       previewIcon: {fileID: 0}
-      meshPrefab: {fileID: 0}
-      patternTexture: {fileID: 0}
-    - shapeName: Chèvre
+      meshPrefab: {fileID: 9001533420777476437, guid: 95b4a3ae83268bb4b8a81647ff0be8b5, type: 3}
+    - shapeName: "Ch\xE8vre"
       previewIcon: {fileID: 0}
-      meshPrefab: {fileID: 0}
-      patternTexture: {fileID: 0}
+      meshPrefab: {fileID: 4658960706254236628, guid: a81ddfa21ab1d644ba4874df44d265da, type: 3}
     - shapeName: Cerf
       previewIcon: {fileID: 0}
-      meshPrefab: {fileID: 0}
-      patternTexture: {fileID: 0}
+      meshPrefab: {fileID: 3267856160239210022, guid: 286b136ee0ce085429010edc352fa213, type: 3}
     - shapeName: Bouc
       previewIcon: {fileID: 0}
-      meshPrefab: {fileID: 0}
-      patternTexture: {fileID: 0}
+      meshPrefab: {fileID: 1165247570368949055, guid: 8115f0df5ff7de24a9954159bc73d1b3, type: 3}
+    patternsSubtitle: Patterns
+    defaultPatternIndex: 0
+    patterns: []
+    colorsSubtitle: Colors
     colorSettings:
       hasColors: 1
       colorButtonPrefab: {fileID: 0}
@@ -59,28 +56,28 @@ MonoBehaviour:
         shaderPropertyName: _BaseColor
         defaultColor: {r: 0.95, g: 0.9, b: 0.78, a: 1}
   - elementName: Wings (Ailes)
-    modificationType: 3
     targetMeshSlot: 6
     targetMaterialZone: 0
-    targetBoneName: Bone_Wings
     supportsFourLegsSync: 0
+    shapesSubtitle: Shapes
+    defaultShapeIndex: 0
     shapes:
     - shapeName: Aucune
       previewIcon: {fileID: 0}
       meshPrefab: {fileID: 0}
-      patternTexture: {fileID: 0}
     - shapeName: Plumes
       previewIcon: {fileID: 0}
-      meshPrefab: {fileID: 0}
-      patternTexture: {fileID: 0}
+      meshPrefab: {fileID: 166172788031432223, guid: ed5831c737f85d5408820cb0739dfc44, type: 3}
     - shapeName: Dragon
       previewIcon: {fileID: 0}
-      meshPrefab: {fileID: 0}
-      patternTexture: {fileID: 0}
+      meshPrefab: {fileID: 5676082124248612038, guid: 4e7582e14ff957f4a9c4302d862c7f0a, type: 3}
     - shapeName: Mini
       previewIcon: {fileID: 0}
-      meshPrefab: {fileID: 0}
-      patternTexture: {fileID: 0}
+      meshPrefab: {fileID: 518455605052451721, guid: 8b17ad9a7f5fccd4db25302093ac9d5d, type: 3}
+    patternsSubtitle: Patterns
+    defaultPatternIndex: 0
+    patterns: []
+    colorsSubtitle: Colors
     colorSettings:
       hasColors: 1
       colorButtonPrefab: {fileID: 0}

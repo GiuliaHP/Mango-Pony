@@ -43,4 +43,10 @@ public class MeshPreviewButton : MonoBehaviour
 
         customizerSwapper.SwapSlotMesh(slotType, meshPrefab);
     }
+
+    public void Setup(Swapper.SlotType slot, CustomizationCategoryData.MeshShapeOption option)
+    {
+        slotType = slot;
+        meshPrefab = option.meshPrefab;
+    }
 }

@@ -31,19 +31,23 @@ public class CustomizationCategoryData : ScriptableObject
     public class CustomizationElement
     {
         [Header("1. Titre de l'élément")]
-        public string elementName; // Ex: "Crinière", "Corps", "Cornes"
+        public string elementName;
 
-        [Header("2. Cibles Swapper")]
+        [Header("2. Lien direct avec le Poney (Swapper)")]
         public Swapper.SlotType targetMeshSlot;
         public Swapper.MaterialZone targetMaterialZone;
         public bool supportsFourLegsSync = false;
 
         [Header("3. Sous-section Shapes (Meshes 3D)")]
         public string shapesSubtitle = "Shapes";
+        [Tooltip("Index de la shape équipée par défaut au lancement (-1 pour rien)")]
+        public int defaultShapeIndex = 0;
         public List<MeshShapeOption> shapes = new List<MeshShapeOption>();
 
         [Header("4. Sous-section Patterns (Motifs Shader)")]
         public string patternsSubtitle = "Patterns";
+        [Tooltip("Index du pattern appliqué par défaut au lancement (-1 pour rien)")]
+        public int defaultPatternIndex = 0;
         public List<PatternOption> patterns = new List<PatternOption>();
 
         [Header("5. Sous-section Colors")]

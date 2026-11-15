@@ -52,6 +52,50 @@ public class Swapper : MonoBehaviour
     }
 
     #endregion
+    
+    [Header("0. Source de Données (Auto-assemblage du Poney)")]
+    [SerializeField] private List<CustomizationCategoryData> categoriesData = new List<CustomizationCategoryData>();
+    [SerializeField] private bool autoInitializeOnStart = true;
+
+    private void Start()
+    {
+        if (autoInitializeOnStart)
+            InitializeFromCategories();
+    }
+
+    public void InitializeFromCategories()
+    {
+        foreach (var category in categoriesData)
+        {
+            if (category == null) continue;
+
+            foreach (var element in category.elements)
+            {
+                // 1. Équipe le Mesh par défaut
+                if (element.shapes != null && element.defaultShapeIndex >= 0 && element.defaultShapeIndex < element.shapes.Count)
+                {
+                    SwapSlotMesh(element.targetMeshSlot, element.shapes[element.defaultShapeIndex].meshPrefab);
+                }
+
+                // 2. Applique le Pattern par défaut
+                if (element.patterns != null && element.defaultPatternIndex >= 0 && element.defaultPatternIndex < element.patterns.Count)
+                {
+                    Texture defaultTex = element.patterns[element.defaultPatternIndex].patternTexture;
+                    if (element.supportsFourLegsSync) SwapAllLegsPattern(defaultTex);
+                    else SwapPatternTexture(element.targetMaterialZone, defaultTex);
+                }
+
+                // 3. Applique les Couleurs par défaut
+                if (element.colorSettings != null && element.colorSettings.hasColors)
+                {
+                    foreach (var channel in element.colorSettings.colorChannels)
+                    {
+                        SwapZoneColor(element.targetMaterialZone, channel.defaultColor, channel.shaderPropertyName);
+                    }
+                }
+            }
+        }
+    }
 
     [Header("1. Configuration des Meshes Modulaires")]
     [SerializeField] private List<SlotBinding> slotBindings = new List<SlotBinding>();

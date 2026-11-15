@@ -24,23 +24,23 @@ MonoBehaviour:
     shapes:
     - shapeName: Classique
       previewIcon: {fileID: 0}
-      meshPrefab: {fileID: 0}
+      meshPrefab: {fileID: 7294722866115003109, guid: 6af288c40bf1f2c42b33d2b817bf463c, type: 3}
       patternTexture: {fileID: 0}
     - shapeName: Brosse
       previewIcon: {fileID: 0}
-      meshPrefab: {fileID: 0}
+      meshPrefab: {fileID: 663555772976636177, guid: 3f8f8654ef74d0245999a0b4f918ebf5, type: 3}
       patternTexture: {fileID: 0}
     - shapeName: Tresse
       previewIcon: {fileID: 0}
-      meshPrefab: {fileID: 0}
+      meshPrefab: {fileID: 2211509692440333529, guid: 8e77c3e2bfb495c46b31f8dc8ed5e732, type: 3}
       patternTexture: {fileID: 0}
     - shapeName: Wavy
       previewIcon: {fileID: 0}
-      meshPrefab: {fileID: 0}
+      meshPrefab: {fileID: 5170043529011977560, guid: 35d28ba28e305c14eafd92c4b3ce71ea, type: 3}
       patternTexture: {fileID: 0}
     - shapeName: Sauvage
       previewIcon: {fileID: 0}
-      meshPrefab: {fileID: 0}
+      meshPrefab: {fileID: 7900694408055846193, guid: b24bb21304bdfa4429c27863eed1bfdc, type: 3}
       patternTexture: {fileID: 0}
     - shapeName: Aucune
       previewIcon: {fileID: 0}
@@ -90,23 +90,23 @@ MonoBehaviour:
     shapes:
     - shapeName: Classique
       previewIcon: {fileID: 0}
-      meshPrefab: {fileID: 0}
+      meshPrefab: {fileID: 2558108519146855687, guid: b562856454e3e4640b908ffb38220df4, type: 3}
       patternTexture: {fileID: 0}
     - shapeName: Licorne
       previewIcon: {fileID: 0}
-      meshPrefab: {fileID: 0}
+      meshPrefab: {fileID: 5062867824010653746, guid: c9643b02e123c72479b2d1e11929691d, type: 3}
       patternTexture: {fileID: 0}
     - shapeName: Tresses
       previewIcon: {fileID: 0}
-      meshPrefab: {fileID: 0}
+      meshPrefab: {fileID: 4313702698930584196, guid: 24c44162b52f56449984312a52e02126, type: 3}
       patternTexture: {fileID: 0}
     - shapeName: Sirène
       previewIcon: {fileID: 0}
-      meshPrefab: {fileID: 0}
+      meshPrefab: {fileID: 2886782006282111346, guid: 35e945348cb7c2640a3d1ac0f082994f, type: 3}
       patternTexture: {fileID: 0}
     - shapeName: Wavy
       previewIcon: {fileID: 0}
-      meshPrefab: {fileID: 0}
+      meshPrefab: {fileID: 7439109741095245200, guid: 9b624953c2a515e40bdf2f66a782551a, type: 3}
       patternTexture: {fileID: 0}
     - shapeName: Aucune
       previewIcon: {fileID: 0}

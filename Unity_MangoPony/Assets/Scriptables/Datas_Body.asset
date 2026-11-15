@@ -16,24 +16,25 @@ MonoBehaviour:
   categoryIcon: {fileID: 0}
   elements:
   - elementName: Body Type
-    modificationType: 3
     targetMeshSlot: 0
     targetMaterialZone: 0
-    targetBoneName: Root_Body
     supportsFourLegsSync: 0
+    shapesSubtitle: Shapes
+    defaultShapeIndex: 0
     shapes:
     - shapeName: Classique
       previewIcon: {fileID: 0}
-      meshPrefab: {fileID: 0}
-      patternTexture: {fileID: 0}
+      meshPrefab: {fileID: 5255561712077989800, guid: aea7d67fbed6d2143816e4bb5c523b4f, type: 3}
     - shapeName: Trait
       previewIcon: {fileID: 0}
-      meshPrefab: {fileID: 0}
-      patternTexture: {fileID: 0}
+      meshPrefab: {fileID: 3348602693624024100, guid: 04c647a2c6ad8a5438475407045e2caf, type: 3}
     - shapeName: Arabe
       previewIcon: {fileID: 0}
-      meshPrefab: {fileID: 0}
-      patternTexture: {fileID: 0}
+      meshPrefab: {fileID: 1169844630218002131, guid: 834ded1630018ac4c881739a47e8672a, type: 3}
+    patternsSubtitle: Patterns
+    defaultPatternIndex: 0
+    patterns: []
+    colorsSubtitle: Colors
     colorSettings:
       hasColors: 1
       colorButtonPrefab: {fileID: 0}
@@ -43,24 +44,25 @@ MonoBehaviour:
         shaderPropertyName: _BaseColor
         defaultColor: {r: 0.76, g: 0.54, b: 0.36, a: 1}
   - elementName: Hooves
-    modificationType: 3
     targetMeshSlot: 2
     targetMaterialZone: 0
-    targetBoneName: Bone_Hooves
     supportsFourLegsSync: 1
+    shapesSubtitle: Shapes
+    defaultShapeIndex: 0
     shapes:
     - shapeName: Classiques
       previewIcon: {fileID: 0}
-      meshPrefab: {fileID: 0}
-      patternTexture: {fileID: 0}
+      meshPrefab: {fileID: 520841010715550463, guid: 3ccd391ee3edb3a4fa6c1d47bbdc27f0, type: 3}
     - shapeName: Fendus
       previewIcon: {fileID: 0}
-      meshPrefab: {fileID: 0}
-      patternTexture: {fileID: 0}
+      meshPrefab: {fileID: 394816894928922137, guid: 873279b1b7f6ae64a81ed6c22e066298, type: 3}
     - shapeName: Fanons
       previewIcon: {fileID: 0}
-      meshPrefab: {fileID: 0}
-      patternTexture: {fileID: 0}
+      meshPrefab: {fileID: 4331820993156706501, guid: 1a9bffc23c4065648ae41c8dd88319a9, type: 3}
+    patternsSubtitle: Patterns
+    defaultPatternIndex: 0
+    patterns: []
+    colorsSubtitle: Colors
     colorSettings:
       hasColors: 1
       colorButtonPrefab: {fileID: 0}
@@ -70,32 +72,31 @@ MonoBehaviour:
         shaderPropertyName: _HoovesColor
         defaultColor: {r: 0.25, g: 0.22, b: 0.2, a: 1}
   - elementName: Body Patterns
-    modificationType: 1
     targetMeshSlot: 0
     targetMaterialZone: 0
-    targetBoneName: Root_Body
     supportsFourLegsSync: 0
+    shapesSubtitle: Shapes
+    defaultShapeIndex: 0
     shapes:
     - shapeName: Aucune
       previewIcon: {fileID: 0}
       meshPrefab: {fileID: 0}
-      patternTexture: {fileID: 0}
     - shapeName: Appaloosa
       previewIcon: {fileID: 0}
       meshPrefab: {fileID: 0}
-      patternTexture: {fileID: 0}
     - shapeName: Mini Tobiano
       previewIcon: {fileID: 0}
       meshPrefab: {fileID: 0}
-      patternTexture: {fileID: 0}
-    - shapeName: Capé
+    - shapeName: "Cap\xE9"
       previewIcon: {fileID: 0}
       meshPrefab: {fileID: 0}
-      patternTexture: {fileID: 0}
     - shapeName: Tobiano
       previewIcon: {fileID: 0}
       meshPrefab: {fileID: 0}
-      patternTexture: {fileID: 0}
+    patternsSubtitle: Patterns
+    defaultPatternIndex: 0
+    patterns: []
+    colorsSubtitle: Colors
     colorSettings:
       hasColors: 1
       colorButtonPrefab: {fileID: 0}
@@ -105,32 +106,31 @@ MonoBehaviour:
         shaderPropertyName: _PatternColor
         defaultColor: {r: 0.96, g: 0.94, b: 0.9, a: 1}
   - elementName: Coat Nuances
-    modificationType: 1
     targetMeshSlot: 0
     targetMaterialZone: 1
-    targetBoneName: Root_Body
     supportsFourLegsSync: 0
+    shapesSubtitle: Shapes
+    defaultShapeIndex: 0
     shapes:
     - shapeName: Solid
       previewIcon: {fileID: 0}
       meshPrefab: {fileID: 0}
-      patternTexture: {fileID: 0}
-    - shapeName: Pommelé
+    - shapeName: "Pommel\xE9"
       previewIcon: {fileID: 0}
       meshPrefab: {fileID: 0}
-      patternTexture: {fileID: 0}
-    - shapeName: Pangaré
+    - shapeName: "Pangar\xE9"
       previewIcon: {fileID: 0}
       meshPrefab: {fileID: 0}
-      patternTexture: {fileID: 0}
     - shapeName: Isabelle
       previewIcon: {fileID: 0}
       meshPrefab: {fileID: 0}
-      patternTexture: {fileID: 0}
-    - shapeName: Moucheté
+    - shapeName: "Mouchet\xE9"
       previewIcon: {fileID: 0}
       meshPrefab: {fileID: 0}
-      patternTexture: {fileID: 0}
+    patternsSubtitle: Patterns
+    defaultPatternIndex: 0
+    patterns: []
+    colorsSubtitle: Colors
     colorSettings:
       hasColors: 1
       colorButtonPrefab: {fileID: 0}
@@ -140,36 +140,34 @@ MonoBehaviour:
         shaderPropertyName: _NuanceColor
         defaultColor: {r: 0.88, g: 0.78, b: 0.65, a: 1}
   - elementName: Leg Marks
-    modificationType: 1
     targetMeshSlot: 0
     targetMaterialZone: 3
-    targetBoneName: Bone_Legs
     supportsFourLegsSync: 1
+    shapesSubtitle: Shapes
+    defaultShapeIndex: 0
     shapes:
     - shapeName: Aucune
       previewIcon: {fileID: 0}
       meshPrefab: {fileID: 0}
-      patternTexture: {fileID: 0}
     - shapeName: Couronne
       previewIcon: {fileID: 0}
       meshPrefab: {fileID: 0}
-      patternTexture: {fileID: 0}
     - shapeName: Petite balzane
       previewIcon: {fileID: 0}
       meshPrefab: {fileID: 0}
-      patternTexture: {fileID: 0}
     - shapeName: Moyenne balzane
       previewIcon: {fileID: 0}
       meshPrefab: {fileID: 0}
-      patternTexture: {fileID: 0}
     - shapeName: Grande balzane
       previewIcon: {fileID: 0}
       meshPrefab: {fileID: 0}
-      patternTexture: {fileID: 0}
     - shapeName: Rayures
       previewIcon: {fileID: 0}
       meshPrefab: {fileID: 0}
-      patternTexture: {fileID: 0}
+    patternsSubtitle: Patterns
+    defaultPatternIndex: 0
+    patterns: []
+    colorsSubtitle: Colors
     colorSettings:
       hasColors: 1
       colorButtonPrefab: {fileID: 0}
