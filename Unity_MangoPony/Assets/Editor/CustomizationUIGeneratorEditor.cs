@@ -15,15 +15,16 @@ public class CustomizationUIGeneratorEditor : Editor
 
         EditorGUILayout.Space(15);
         GUI.backgroundColor = new Color(0.35f, 0.7f, 1f);
-        if (GUILayout.Button("Lier les Prefabs aux ScriptableObjects (par nom)", GUILayout.Height(32)))
+        if (GUILayout.Button("1. Lier les Prefabs, Icônes & Textures (par nom)", GUILayout.Height(32)))
         {
             PonyDataLinker.LinkAllPrefabsToDataAssets();
         }
 
         EditorGUILayout.Space(5);
         GUI.backgroundColor = new Color(0.4f, 0.85f, 0.55f);
-        if (GUILayout.Button("Générer l'Interface UI (Hors Play Mode)", GUILayout.Height(40)))
+        if (GUILayout.Button("2. Générer l'Interface UI (Hors Play Mode)", GUILayout.Height(40)))
         {
+            PonyDataLinker.LinkAllPrefabsToDataAssets(false); // Synchronise automatiquement avant de générer
             GenerateUI(generator);
         }
 

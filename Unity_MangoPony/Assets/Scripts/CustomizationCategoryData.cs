@@ -24,7 +24,7 @@ public class CustomizationCategoryData : ScriptableObject
     #endregion
 
     // =========================================================================
-    // STRUCTURES DE DONNÉES IMBRIQUÉES (Inspecteur propre et repliable)
+    // STRUCTURES DE DONNÉES IMBRIQUÉES
     // =========================================================================
 
     [System.Serializable]
@@ -59,40 +59,34 @@ public class CustomizationCategoryData : ScriptableObject
     public class MeshShapeOption
     {
         public string shapeName;
-        public Sprite previewIcon;
-        public GameObject meshPrefab;
+
+        [HideInInspector] public Sprite previewIcon;
+        [HideInInspector] public GameObject meshPrefab;
     }
 
     [System.Serializable]
     public class PatternOption
     {
         public string patternName;
-        public Sprite previewIcon;
-        public Texture patternTexture;
+
+        [HideInInspector] public Sprite previewIcon;
+        [HideInInspector] public Texture patternTexture;
     }
 
     public enum ElementModificationType
     {
-        MeshOnly,           // Uniquement un modèle 3D (ex: Cornes, Ailes)
-        MaterialPatternOnly,// Uniquement une texture/masque de shader (ex: Marques du front, Pommelé)
-        ColorOnly,          // Uniquement des couleurs (ex: Yeux si pas de changement de forme)
-        MeshAndMaterial     // Combine formes 3D + motifs/couleurs (ex: Crinière, Corps)
+        MeshOnly,
+        MaterialPatternOnly,
+        ColorOnly,
+        MeshAndMaterial
     }
 
     [System.Serializable]
     public class ShapeOption
     {
-        [Tooltip("Nom de la variation (ex: Round, Big, Long, Tresse, Étoile, Aucune...)")]
         public string shapeName;
-
-        [Tooltip("Icône affichée sur le bouton de prévisualisation")]
         public Sprite previewIcon;
-
-        [Header("Donnée Appliquée (Remplir selon le type d'élément)")]
-        [Tooltip("Prefab 3D à instancier (laisser vide si c'est une option 'Aucune' ou un motif 2D)")]
         public GameObject meshPrefab;
-
-        [Tooltip("Texture/Masque de motif à envoyer au Shader (laisser vide si c'est un mesh 3D)")]
         public Texture patternTexture;
     }
 

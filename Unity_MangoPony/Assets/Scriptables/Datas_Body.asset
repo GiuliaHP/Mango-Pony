@@ -22,18 +22,33 @@ MonoBehaviour:
     shapesSubtitle: Shapes
     defaultShapeIndex: 0
     shapes:
-    - shapeName: Classic
-      previewIcon: {fileID: 0}
-      meshPrefab: {fileID: 5255561712077989800, guid: aea7d67fbed6d2143816e4bb5c523b4f, type: 3}
+    - shapeName: Base
+      previewIcon: {fileID: -4249833058841401864, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
+      meshPrefab: {fileID: 7009575379921432052, guid: 9bc90af40e1708341ae01c947b2a1ca9, type: 3}
     - shapeName: Draft
+      previewIcon: {fileID: -265977773716756420, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
+      meshPrefab: {fileID: 257488850483235423, guid: d5e1e4426cc86b44d95d55be41fe1bb6, type: 3}
+    - shapeName: Slim
+      previewIcon: {fileID: 6073655841404583815, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
+      meshPrefab: {fileID: 9179952281599920403, guid: 8ddd8ea970e49b3439a3a20835bf8d55, type: 3}
+    patternsSubtitle: Body Pattern
+    defaultPatternIndex: 0
+    patterns:
+    - patternName: None
       previewIcon: {fileID: 0}
-      meshPrefab: {fileID: 3348602693624024100, guid: 04c647a2c6ad8a5438475407045e2caf, type: 3}
-    - shapeName: Arabian
+      patternTexture: {fileID: 0}
+    - patternName: Caped
       previewIcon: {fileID: 0}
-      meshPrefab: {fileID: 1169844630218002131, guid: 834ded1630018ac4c881739a47e8672a, type: 3}
-    patternsSubtitle: Patterns
-    defaultPatternIndex: -1
-    patterns: []
+      patternTexture: {fileID: 2800000, guid: 177d68c0ca12b0347aee9eeb9d7239e3, type: 3}
+    - patternName: MiniTobiano
+      previewIcon: {fileID: 0}
+      patternTexture: {fileID: 2800000, guid: fcb24b7bb4adbcf40bef0284db528918, type: 3}
+    - patternName: Tobiano
+      previewIcon: {fileID: 0}
+      patternTexture: {fileID: 2800000, guid: fcb24b7bb4adbcf40bef0284db528918, type: 3}
+    - patternName: Appaloosa
+      previewIcon: {fileID: 0}
+      patternTexture: {fileID: 2800000, guid: 438028ec536bebb459464ba3e6831700, type: 3}
     colorsSubtitle: Colors
     colorSettings:
       hasColors: 1
@@ -43,68 +58,6 @@ MonoBehaviour:
       - colorName: Coat Main Color
         shaderPropertyName: _BaseColor
         defaultColor: {r: 0.76, g: 0.54, b: 0.36, a: 1}
-  - elementName: Hooves
-    targetMeshSlot: 2
-    targetMaterialZone: 0
-    supportsFourLegsSync: 1
-    shapesSubtitle: Shapes
-    defaultShapeIndex: 0
-    shapes:
-    - shapeName: Classic
-      previewIcon: {fileID: 0}
-      meshPrefab: {fileID: 520841010715550463, guid: 3ccd391ee3edb3a4fa6c1d47bbdc27f0, type: 3}
-    - shapeName: Cloven
-      previewIcon: {fileID: 0}
-      meshPrefab: {fileID: 394816894928922137, guid: 873279b1b7f6ae64a81ed6c22e066298, type: 3}
-    - shapeName: Feathered
-      previewIcon: {fileID: 0}
-      meshPrefab: {fileID: 4331820993156706501, guid: 1a9bffc23c4065648ae41c8dd88319a9, type: 3}
-    patternsSubtitle: Patterns
-    defaultPatternIndex: -1
-    patterns: []
-    colorsSubtitle: Colors
-    colorSettings:
-      hasColors: 1
-      colorButtonPrefab: {fileID: 0}
-      colorPickerPrefab: {fileID: 0}
-      colorChannels:
-      - colorName: Hooves Color
-        shaderPropertyName: _HoovesColor
-        defaultColor: {r: 0.25, g: 0.22, b: 0.2, a: 1}
-  - elementName: Body Patterns
-    targetMeshSlot: 0
-    targetMaterialZone: 0
-    supportsFourLegsSync: 0
-    shapesSubtitle: Shapes
-    defaultShapeIndex: -1
-    shapes: []
-    patternsSubtitle: Patterns
-    defaultPatternIndex: 0
-    patterns:
-    - patternName: None
-      previewIcon: {fileID: -2448051357591836136, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
-      patternTexture: {fileID: 0}
-    - patternName: Appaloosa
-      previewIcon: {fileID: -1847812161318664106, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
-      patternTexture: {fileID: 2800000, guid: 438028ec536bebb459464ba3e6831700, type: 3}
-    - patternName: Mini Tobiano
-      previewIcon: {fileID: 5045598883836856429, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
-      patternTexture: {fileID: 2800000, guid: fcb24b7bb4adbcf40bef0284db528918, type: 3}
-    - patternName: Caped
-      previewIcon: {fileID: 5332561770373008783, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
-      patternTexture: {fileID: 2800000, guid: 177d68c0ca12b0347aee9eeb9d7239e3, type: 3}
-    - patternName: Tobiano
-      previewIcon: {fileID: 3482039982310036012, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
-      patternTexture: {fileID: 2800000, guid: fcb24b7bb4adbcf40bef0284db528918, type: 3}
-    colorsSubtitle: Colors
-    colorSettings:
-      hasColors: 1
-      colorButtonPrefab: {fileID: 0}
-      colorPickerPrefab: {fileID: 0}
-      colorChannels:
-      - colorName: Pattern Color
-        shaderPropertyName: _PatternColor
-        defaultColor: {r: 0.96, g: 0.94, b: 0.9, a: 1}
   - elementName: Coat Nuances
     targetMeshSlot: 0
     targetMaterialZone: 1
@@ -136,30 +89,39 @@ MonoBehaviour:
       - colorName: Nuance Color
         shaderPropertyName: _NuanceColor
         defaultColor: {r: 0.88, g: 0.78, b: 0.65, a: 1}
-  - elementName: Leg Marks
-    targetMeshSlot: 0
+  - elementName: Legs
+    targetMeshSlot: 2
     targetMaterialZone: 3
-    supportsFourLegsSync: 1
+    supportsFourLegsSync: 0
     shapesSubtitle: Shapes
-    defaultShapeIndex: -1
-    shapes: []
+    defaultShapeIndex: 0
+    shapes:
+    - shapeName: Base
+      previewIcon: {fileID: 746843545963474028, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
+      meshPrefab: {fileID: 1366074872888762623, guid: e844a31857b9af946ac8965ce27f80b0, type: 3}
+    - shapeName: Slim
+      previewIcon: {fileID: -6783563537083282260, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
+      meshPrefab: {fileID: 3242820722354682607, guid: cf0d60b619571184fb7f7cc66ba809d5, type: 3}
+    - shapeName: Draft
+      previewIcon: {fileID: 8425432924880420005, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
+      meshPrefab: {fileID: 2724616053684178005, guid: 278756034beaead4783b3a1992c2e908, type: 3}
     patternsSubtitle: Patterns
     defaultPatternIndex: 0
     patterns:
     - patternName: None
       previewIcon: {fileID: 2578623089327073496, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
       patternTexture: {fileID: 0}
-    - patternName: Coronet
-      previewIcon: {fileID: 5132398212834887724, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
-      patternTexture: {fileID: 2800000, guid: 208d2344454b20e4290d143838736cc2, type: 3}
-    - patternName: Pastern
-      previewIcon: {fileID: -4508226223089859040, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
-      patternTexture: {fileID: 2800000, guid: cd842ff3d2001214a8a52f209fe7acf0, type: 3}
-    - patternName: Sock
-      previewIcon: {fileID: -8279612462302189904, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
-      patternTexture: {fileID: 2800000, guid: c4d3f50e96cbd784ab06e0cf97717821, type: 3}
-    - patternName: Stocking
+    - patternName: Long Balzanne
       previewIcon: {fileID: 91470800464861876, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
+      patternTexture: {fileID: 2800000, guid: 208d2344454b20e4290d143838736cc2, type: 3}
+    - patternName: Medium Balzanne
+      previewIcon: {fileID: -8279612462302189904, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
+      patternTexture: {fileID: 2800000, guid: cd842ff3d2001214a8a52f209fe7acf0, type: 3}
+    - patternName: Small Balzanne
+      previewIcon: {fileID: -4508226223089859040, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
+      patternTexture: {fileID: 2800000, guid: c4d3f50e96cbd784ab06e0cf97717821, type: 3}
+    - patternName: Crown
+      previewIcon: {fileID: 5132398212834887724, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
       patternTexture: {fileID: 2800000, guid: de52a5a8c83aa2b4588910be8805c67b, type: 3}
     colorsSubtitle: Colors
     colorSettings:

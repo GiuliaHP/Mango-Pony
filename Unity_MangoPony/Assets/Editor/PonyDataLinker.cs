@@ -252,7 +252,17 @@ public static class PonyDataLinker
 
         // Détermine les préfixes autorisés selon le slot ou la catégorie
         List<string> allowedPrefixes = new List<string>();
-        if (normCat.Contains("horn") || normCat.Contains("corne"))
+        if (normCat.Contains("headpattern") || normCat.Contains("facemark") || (normCat.Contains("marque") && normCat.Contains("front")))
+            allowedPrefixes.Add("headpattern");
+        else if (normCat.Contains("head") || normCat.Contains("tete"))
+            allowedPrefixes.Add("head");
+        else if (normCat.Contains("bodypattern") || normCat.Contains("robe") || normCat.Contains("coat") || normCat.Contains("pattern"))
+            allowedPrefixes.Add("bodypattern");
+        else if (normCat.Contains("body") || normCat.Contains("corps"))
+            allowedPrefixes.Add("body");
+        else if (normCat.Contains("hooves") || normCat.Contains("sabot"))
+            allowedPrefixes.Add("hooves");
+        else if (normCat.Contains("horn") || normCat.Contains("corne"))
             allowedPrefixes.Add("horn");
         else if (normCat.Contains("wing") || normCat.Contains("aile"))
             allowedPrefixes.Add("wings");
@@ -263,25 +273,21 @@ public static class PonyDataLinker
         }
         else if (normCat.Contains("tail") || normCat.Contains("queue"))
             allowedPrefixes.Add("tail");
-        else if (normCat.Contains("headpattern") || normCat.Contains("facemark") || (normCat.Contains("marque") && normCat.Contains("front")))
-            allowedPrefixes.Add("headpattern");
-        else if (normCat.Contains("leg") || normCat.Contains("balzane") || normCat.Contains("membre"))
+        else if (normCat.Contains("leg") || normCat.Contains("hooves") || normCat.Contains("sabot") || normCat.Contains("balzane") || normCat.Contains("membre"))
         {
             allowedPrefixes.Add("legspaterns");
             allowedPrefixes.Add("legspattern");
+            allowedPrefixes.Add("legs");
+            allowedPrefixes.Add("hooves");
         }
-        else if (normCat.Contains("bodypattern") || normCat.Contains("robe") || normCat.Contains("coat") || normCat.Contains("pattern"))
-            allowedPrefixes.Add("bodypattern");
         else if (normCat.Contains("colorrepartition") || normCat.Contains("repartition") || normCat.Contains("nuance"))
             allowedPrefixes.Add("colorrepartition");
         else
         {
-            // Slots 3D sans icônes dédiées dans le PSD (Head, Body, Hooves...)
-            // On ne cherche pas d'icônes pour éviter les faux positifs (ex: corne sur tête, crinière sur corps)
             return null;
         }
 
-        // 1. Clés directes avec les préfixes autorisés
+        // 1. Clés directes avec les préfixes autorisés (ex: "headbase", "headslim", "headdraft")
         foreach (var syn in synonyms)
         {
             string exactKey = normCat + syn;
@@ -307,6 +313,12 @@ public static class PonyDataLinker
             }
 
             if (!hasAllowedPrefix) continue;
+
+            // Évite que "head" matche "headpattern..."
+            if (allowedPrefixes.Contains("head") && kvp.Key.StartsWith("headpattern", StringComparison.OrdinalIgnoreCase))
+                continue;
+            if (allowedPrefixes.Contains("body") && kvp.Key.StartsWith("bodypattern", StringComparison.OrdinalIgnoreCase))
+                continue;
 
             foreach (var syn in synonyms)
             {
@@ -365,13 +377,13 @@ public static class PonyDataLinker
             case "mermaid": list.AddRange(new[] { "sirene", "mermaid" }); break;
 
             // Head Shapes
-            case "roman": list.AddRange(new[] { "bombee", "roman" }); break;
-            case "plate": list.AddRange(new[] { "straight", "plate" }); break;
-            case "dished": list.AddRange(new[] { "creuse", "dished" }); break;
+            case "roman": list.AddRange(new[] { "bombee", "roman", "draft" }); break;
+            case "plate": list.AddRange(new[] { "straight", "plate", "base" }); break;
+            case "dished": list.AddRange(new[] { "creuse", "dished", "slim" }); break;
 
             // Body
             case "draft": list.AddRange(new[] { "trait", "draft" }); break;
-            case "arabian": list.AddRange(new[] { "arabe", "arabian" }); break;
+            case "arabian": list.AddRange(new[] { "arabe", "arabian", "slim" }); break;
 
             // Hooves
             case "cloven": list.AddRange(new[] { "fendus", "cloven" }); break;

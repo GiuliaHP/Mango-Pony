@@ -27,16 +27,16 @@ MonoBehaviour:
       meshPrefab: {fileID: 0}
     - shapeName: Straight
       previewIcon: {fileID: -7711398523137129504, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
-      meshPrefab: {fileID: 2625141406832726654, guid: 6928f66eb7b89aa4da038bfe14dd4013, type: 3}
+      meshPrefab: {fileID: 7999640256794378591, guid: f834a503b3c99a54bb7fb2dcd7b6da6b, type: 3}
     - shapeName: Curved
       previewIcon: {fileID: 2107159372141095115, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
-      meshPrefab: {fileID: 1777948874886539092, guid: cd2d865568d216b4582e43ace4246206, type: 3}
+      meshPrefab: {fileID: 2536559539963636410, guid: 44dd6a81fe8d2ba4588efe0cb7c8ad90, type: 3}
     - shapeName: Rhino
       previewIcon: {fileID: 7842106240852296181, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
-      meshPrefab: {fileID: 9001533420777476437, guid: 95b4a3ae83268bb4b8a81647ff0be8b5, type: 3}
+      meshPrefab: {fileID: 591562272287364189, guid: bb05ec9711df27c4fb20a14b565235da, type: 3}
     - shapeName: Goat
       previewIcon: {fileID: 5882982922341788624, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
-      meshPrefab: {fileID: 4658960706254236628, guid: a81ddfa21ab1d644ba4874df44d265da, type: 3}
+      meshPrefab: {fileID: 7018018426036731313, guid: f80ce8d4b366dad48a5349d588388008, type: 3}
     patternsSubtitle: Patterns
     defaultPatternIndex: -1
     patterns: []
@@ -61,13 +61,13 @@ MonoBehaviour:
       meshPrefab: {fileID: 0}
     - shapeName: Feathered
       previewIcon: {fileID: 94257746875860944, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
-      meshPrefab: {fileID: 166172788031432223, guid: ed5831c737f85d5408820cb0739dfc44, type: 3}
+      meshPrefab: {fileID: 6328529845673026523, guid: 619eb1acef366f244944f202687db61a, type: 3}
     - shapeName: Dragon
       previewIcon: {fileID: 3438546090263947381, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
-      meshPrefab: {fileID: 5676082124248612038, guid: 4e7582e14ff957f4a9c4302d862c7f0a, type: 3}
+      meshPrefab: {fileID: 5051135035329593031, guid: c1cbf5eb4aa11ea48a235b760844b885, type: 3}
     - shapeName: Small
       previewIcon: {fileID: 2736858625169816868, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
-      meshPrefab: {fileID: 518455605052451721, guid: 8b17ad9a7f5fccd4db25302093ac9d5d, type: 3}
+      meshPrefab: {fileID: 3687198686593048892, guid: 5b8b81130bea7fb43984a5b5464dec8e, type: 3}
     patternsSubtitle: Patterns
     defaultPatternIndex: -1
     patterns: []
