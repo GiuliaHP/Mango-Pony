@@ -88,9 +88,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 418451200196436014, guid: c55785d24c99b5041b4c1d7e2b6a914a, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 418451200196436014, guid: c55785d24c99b5041b4c1d7e2b6a914a, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 418451200196436014, guid: c55785d24c99b5041b4c1d7e2b6a914a, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 418451200196436014, guid: c55785d24c99b5041b4c1d7e2b6a914a, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8035233834191105771, guid: c55785d24c99b5041b4c1d7e2b6a914a, type: 3}
       propertyPath: m_Name
       value: Button_Preview_Pattern
+      objectReference: {fileID: 0}
+    - target: {fileID: 8159281839226514549, guid: c55785d24c99b5041b4c1d7e2b6a914a, type: 3}
+      propertyPath: m_TargetGraphic
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4791217381852080408, guid: c55785d24c99b5041b4c1d7e2b6a914a, type: 3}
@@ -118,6 +138,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac4f20e4504aed648ac46ce06370eca0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PatternPreviewButton
-  targetZone: 0
-  patternTexture: {fileID: 0}
-  applyToAllLegs: 0

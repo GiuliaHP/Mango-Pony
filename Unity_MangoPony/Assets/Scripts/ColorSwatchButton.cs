@@ -4,18 +4,11 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Button))]
 public class ColorSwatchButton : MonoBehaviour
 {
-    [Header("1. Couleur & Visuel du Bouton")]
-    [Tooltip("Couleur de base de ce bouton au démarrage")]
-    [SerializeField] private Color defaultColor = Color.white;
-    [Tooltip("L'Image UI qui affichera la couleur stockée (si vide, prend l'Image du bouton)")]
+    [SerializeField, HideInInspector] private Color defaultColor = Color.white;
     [SerializeField] private Image swatchPreviewImage;
+    [SerializeField, HideInInspector] private Swapper.MaterialZone targetZone = Swapper.MaterialZone.BodyPattern;
+    [SerializeField, HideInInspector] private string shaderColorProperty = "_BaseColor";
 
-    [Header("2. Cible dans le Shader (Définie par ce bouton)")]
-    [SerializeField] private Swapper.MaterialZone targetZone = Swapper.MaterialZone.BodyPattern;
-    [Tooltip("Nom exact de la propriété Color dans Shader Graph (ex: _BaseColor, _PatternColor)")]
-    [SerializeField] private string shaderColorProperty = "_BaseColor";
-
-    // État interne
     private Color currentColor;
     private Button button;
     private CustomColorWheel colorWheel;

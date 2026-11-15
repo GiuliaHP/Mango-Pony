@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc27c33659d38af49ab393c9e6cc6457, type: 3}
+  m_Name: Button_Tab
+  m_EditorClassIdentifier: Assembly-CSharp::JuicyButtonProfile
+  useScaleAnimation: 0
+  hoverScale: {x: 1.06, y: 1.06, z: 1.06}
+  hoverSizeOffset: {x: 0, y: 10}
+  hoverDuration: 0.2
+  hoverEase: 6
+  punchScale: {x: -0.08, y: -0.08, z: 0}
+  punchSize: {x: 0, y: 0}
+  punchDuration: 0.25
+  punchVibrato: 2
+  punchElasticity: 0.5
+  animateColor: 0
+  normalColor: {r: 1, g: 1, b: 1, a: 1}
+  hoverColor: {r: 0.95, g: 0.95, b: 1, a: 1}
+  disabledColor: {r: 0.6, g: 0.6, b: 0.6, a: 0.5}
+  disabledAlpha: 0.5
+  disabledScale: 0.95
+  disabledSizeOffset: {x: 0, y: -10}

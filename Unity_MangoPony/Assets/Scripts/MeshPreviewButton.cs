@@ -4,14 +4,9 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Button))]
 public class MeshPreviewButton : MonoBehaviour
 {
-    [Header("Configuration du Mesh")]
-    [Tooltip("L'emplacement à modifier (Crinière, Corne, Ailes, Sabots, etc.)")]
-    [SerializeField] private Swapper.SlotType slotType;
+    [SerializeField, HideInInspector] private Swapper.SlotType slotType;
+    [SerializeField, HideInInspector] private GameObject meshPrefab;
 
-    [Tooltip("Le Prefab 3D à instancier (Laisser vide pour une option 'Aucun / Vide')")]
-    [SerializeField] private GameObject meshPrefab;
-
-    // Références récupérées automatiquement en interne
     private Button button;
     private Swapper customizerSwapper;
 

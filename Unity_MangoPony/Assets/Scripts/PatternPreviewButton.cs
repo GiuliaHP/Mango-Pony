@@ -4,17 +4,10 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Button))]
 public class PatternPreviewButton : MonoBehaviour
 {
-    [Header("Configuration du Motif")]
-    [Tooltip("La zone du poney à modifier (Corps, Front, Patte, Crinière...)")]
-    [SerializeField] private Swapper.MaterialZone targetZone;
+    [SerializeField, HideInInspector] private Swapper.MaterialZone targetZone;
+    [SerializeField, HideInInspector] private Texture patternTexture;
+    [SerializeField, HideInInspector] private bool applyToAllLegs = false;
 
-    [Tooltip("La Texture / Masque à envoyer dans le Shader (Laisser vide pour 'Aucun motif')")]
-    [SerializeField] private Texture patternTexture;
-
-    [Tooltip("Si coché, applique le motif aux 4 pattes simultanément")]
-    [SerializeField] private bool applyToAllLegs = false;
-
-    // Références récupérées automatiquement en interne
     private Button button;
     private Swapper customizerSwapper;
 

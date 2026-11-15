@@ -15,37 +15,35 @@ MonoBehaviour:
   categoryName: Hair
   categoryIcon: {fileID: 0}
   elements:
-  - elementName: Mane (Crinière)
-    modificationType: 3
+  - elementName: Mane
     targetMeshSlot: 3
     targetMaterialZone: 7
-    targetBoneName: Bone_Mane
     supportsFourLegsSync: 0
+    shapesSubtitle: Shapes
+    defaultShapeIndex: 0
     shapes:
-    - shapeName: Classique
-      previewIcon: {fileID: 0}
+    - shapeName: Classic
+      previewIcon: {fileID: -1652475177483671101, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
       meshPrefab: {fileID: 7294722866115003109, guid: 6af288c40bf1f2c42b33d2b817bf463c, type: 3}
-      patternTexture: {fileID: 0}
-    - shapeName: Brosse
-      previewIcon: {fileID: 0}
+    - shapeName: Brush
+      previewIcon: {fileID: -4504340845707973313, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
       meshPrefab: {fileID: 663555772976636177, guid: 3f8f8654ef74d0245999a0b4f918ebf5, type: 3}
-      patternTexture: {fileID: 0}
-    - shapeName: Tresse
-      previewIcon: {fileID: 0}
+    - shapeName: Braided
+      previewIcon: {fileID: 7346286456824143923, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
       meshPrefab: {fileID: 2211509692440333529, guid: 8e77c3e2bfb495c46b31f8dc8ed5e732, type: 3}
-      patternTexture: {fileID: 0}
     - shapeName: Wavy
-      previewIcon: {fileID: 0}
+      previewIcon: {fileID: -1056518617131817030, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
       meshPrefab: {fileID: 5170043529011977560, guid: 35d28ba28e305c14eafd92c4b3ce71ea, type: 3}
-      patternTexture: {fileID: 0}
-    - shapeName: Sauvage
-      previewIcon: {fileID: 0}
+    - shapeName: Wild
+      previewIcon: {fileID: 8992201526706326958, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
       meshPrefab: {fileID: 7900694408055846193, guid: b24bb21304bdfa4429c27863eed1bfdc, type: 3}
-      patternTexture: {fileID: 0}
-    - shapeName: Aucune
-      previewIcon: {fileID: 0}
+    - shapeName: None
+      previewIcon: {fileID: -6310264775393301120, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
       meshPrefab: {fileID: 0}
-      patternTexture: {fileID: 0}
+    patternsSubtitle: Patterns
+    defaultPatternIndex: -1
+    patterns: []
+    colorsSubtitle: Colors
     colorSettings:
       hasColors: 1
       colorButtonPrefab: {fileID: 0}
@@ -57,61 +55,35 @@ MonoBehaviour:
       - colorName: Mane Pattern Color
         shaderPropertyName: _PatternColor
         defaultColor: {r: 0.92, g: 0.78, b: 0.45, a: 1}
-  - elementName: Mane Pattern
-    modificationType: 1
-    targetMeshSlot: 3
-    targetMaterialZone: 7
-    targetBoneName: Bone_Mane
-    supportsFourLegsSync: 0
-    shapes:
-    - shapeName: Aucun
-      previewIcon: {fileID: 0}
-      meshPrefab: {fileID: 0}
-      patternTexture: {fileID: 0}
-    - shapeName: Naturel
-      previewIcon: {fileID: 0}
-      meshPrefab: {fileID: 0}
-      patternTexture: {fileID: 0}
-    - shapeName: Fantaisie
-      previewIcon: {fileID: 0}
-      meshPrefab: {fileID: 0}
-      patternTexture: {fileID: 0}
-    colorSettings:
-      hasColors: 0
-      colorButtonPrefab: {fileID: 0}
-      colorPickerPrefab: {fileID: 0}
-      colorChannels: []
-  - elementName: Tail (Queue)
-    modificationType: 3
+  - elementName: Tail
     targetMeshSlot: 4
     targetMaterialZone: 8
-    targetBoneName: Bone_Tail
     supportsFourLegsSync: 0
+    shapesSubtitle: Shapes
+    defaultShapeIndex: 0
     shapes:
-    - shapeName: Classique
-      previewIcon: {fileID: 0}
+    - shapeName: Classic
+      previewIcon: {fileID: -8543613761460130509, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
       meshPrefab: {fileID: 2558108519146855687, guid: b562856454e3e4640b908ffb38220df4, type: 3}
-      patternTexture: {fileID: 0}
-    - shapeName: Licorne
-      previewIcon: {fileID: 0}
+    - shapeName: Unicorn
+      previewIcon: {fileID: 8349313925881549238, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
       meshPrefab: {fileID: 5062867824010653746, guid: c9643b02e123c72479b2d1e11929691d, type: 3}
-      patternTexture: {fileID: 0}
-    - shapeName: Tresses
-      previewIcon: {fileID: 0}
+    - shapeName: Braided
+      previewIcon: {fileID: -8848381498564387377, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
       meshPrefab: {fileID: 4313702698930584196, guid: 24c44162b52f56449984312a52e02126, type: 3}
-      patternTexture: {fileID: 0}
-    - shapeName: Sirène
-      previewIcon: {fileID: 0}
+    - shapeName: Mermaid
+      previewIcon: {fileID: -490944786137750867, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
       meshPrefab: {fileID: 2886782006282111346, guid: 35e945348cb7c2640a3d1ac0f082994f, type: 3}
-      patternTexture: {fileID: 0}
     - shapeName: Wavy
-      previewIcon: {fileID: 0}
+      previewIcon: {fileID: 2099833848526938379, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
       meshPrefab: {fileID: 7439109741095245200, guid: 9b624953c2a515e40bdf2f66a782551a, type: 3}
-      patternTexture: {fileID: 0}
-    - shapeName: Aucune
-      previewIcon: {fileID: 0}
+    - shapeName: None
+      previewIcon: {fileID: -7235979748710687288, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
       meshPrefab: {fileID: 0}
-      patternTexture: {fileID: 0}
+    patternsSubtitle: Patterns
+    defaultPatternIndex: -1
+    patterns: []
+    colorsSubtitle: Colors
     colorSettings:
       hasColors: 1
       colorButtonPrefab: {fileID: 0}
@@ -123,27 +95,3 @@ MonoBehaviour:
       - colorName: Tail Pattern Color
         shaderPropertyName: _PatternColor
         defaultColor: {r: 0.92, g: 0.78, b: 0.45, a: 1}
-  - elementName: Tail Pattern
-    modificationType: 1
-    targetMeshSlot: 4
-    targetMaterialZone: 8
-    targetBoneName: Bone_Tail
-    supportsFourLegsSync: 0
-    shapes:
-    - shapeName: Aucun
-      previewIcon: {fileID: 0}
-      meshPrefab: {fileID: 0}
-      patternTexture: {fileID: 0}
-    - shapeName: Naturel
-      previewIcon: {fileID: 0}
-      meshPrefab: {fileID: 0}
-      patternTexture: {fileID: 0}
-    - shapeName: Fantaisie
-      previewIcon: {fileID: 0}
-      meshPrefab: {fileID: 0}
-      patternTexture: {fileID: 0}
-    colorSettings:
-      hasColors: 0
-      colorButtonPrefab: {fileID: 0}
-      colorPickerPrefab: {fileID: 0}
-      colorChannels: []
