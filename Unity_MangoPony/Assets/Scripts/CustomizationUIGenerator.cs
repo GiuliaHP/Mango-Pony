@@ -79,6 +79,9 @@ public class CustomizationUIGenerator : MonoBehaviour
     [SerializeField, HideInInspector]
     private List<GameObject> categoryPanels = new List<GameObject>();
 
+    [Header("Caméra")]
+    [SerializeField] private CameraController cameraController;
+
     private int currentActiveIndex = -1;
     private Sequence transitionSequence;
     private List<CategoryTabButton> registeredButtons = new List<CategoryTabButton>();
@@ -90,10 +93,11 @@ public class CustomizationUIGenerator : MonoBehaviour
             SetPanelsVisibility(0);
             currentActiveIndex = 0;
 
+            if (cameraController != null && categories.Count > 0 && categories[0] != null)
+                cameraController.FocusOnZone(categories[0].cameraFocus, immediate: true);
+
             if (categoryContainer != null)
-            {
                 SetContainerWidth(openWidth);
-            }
 
             UpdateButtonsVisualState(immediate: true);
         }
@@ -157,6 +161,11 @@ public class CustomizationUIGenerator : MonoBehaviour
             DOVirtual.Float(0f, openWidth, openDuration, SetContainerWidth)
                      .SetEase(ToDOTweenEase(openEase))
         );
+
+        if (cameraController != null && index < categories.Count && categories[index] != null)
+        {
+            cameraController.FocusOnZone(categories[index].cameraFocus, immediate: false);
+        }
     }
 
     /// <summary>

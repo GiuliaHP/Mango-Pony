@@ -13,6 +13,9 @@ public class CustomizationCategoryData : ScriptableObject
     [Tooltip("Icône optionnelle pour l'onglet de navigation")]
     public Sprite categoryIcon;
 
+    [Tooltip("Point de vue caméra associé à cette catégorie")]
+    public CameraFocusZone cameraFocus = CameraFocusZone.FullBody;
+
     #endregion
 
     #region 2. Éléments de la Catégorie
@@ -79,6 +82,14 @@ public class CustomizationCategoryData : ScriptableObject
         MaterialPatternOnly,
         ColorOnly,
         MeshAndMaterial
+    }
+    
+    public enum CameraFocusZone
+    {
+        FullBody,
+        Head,
+        Hair,
+        Accessories
     }
 
     [System.Serializable]
