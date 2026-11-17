@@ -24,7 +24,7 @@ public class CustomizationUIGeneratorEditor : Editor
         GUI.backgroundColor = new Color(0.4f, 0.85f, 0.55f);
         if (GUILayout.Button("2. Générer l'Interface UI (Hors Play Mode)", GUILayout.Height(40)))
         {
-            PonyDataLinker.LinkAllPrefabsToDataAssets(false); // Synchronise automatiquement avant de générer
+            PonyDataLinker.LinkAllPrefabsToDataAssets(false);
             GenerateUI(generator);
         }
 
@@ -39,13 +39,9 @@ public class CustomizationUIGeneratorEditor : Editor
 
     private void ClearUI(CustomizationUIGenerator gen)
     {
-        if (gen.tabsContainer != null)
-            ClearChildrenImmediate(gen.tabsContainer);
+        if (gen.tabsContainer != null) ClearChildrenImmediate(gen.tabsContainer);
+        if (gen.panelsContainer != null) ClearChildrenImmediate(gen.panelsContainer);
 
-        if (gen.panelsContainer != null)
-            ClearChildrenImmediate(gen.panelsContainer);
-
-        // Vide également la liste interne categoryPanels sur le Generator
         SerializedObject genSO = new SerializedObject(gen);
         SerializedProperty panelsProp = genSO.FindProperty("categoryPanels");
         if (panelsProp != null)
@@ -60,16 +56,14 @@ public class CustomizationUIGeneratorEditor : Editor
     private void ClearChildrenImmediate(Transform parent)
     {
         for (int i = parent.childCount - 1; i >= 0; i--)
-        {
             Undo.DestroyObjectImmediate(parent.GetChild(i).gameObject);
-        }
     }
 
     private void GenerateUI(CustomizationUIGenerator gen)
     {
         if (gen.tabsContainer == null || gen.panelsContainer == null || gen.categoryPanelPrefab == null)
         {
-            Debug.LogError("[CustomizationUIGenerator] Assigne tabsContainer, panelsContainer et categoryPanelPrefab dans l'Inspecteur !");
+            Debug.LogError("[CustomizationUIGenerator] Assigne tabsContainer, panelsContainer et categoryPanelPrefab !");
             return;
         }
 
@@ -77,7 +71,6 @@ public class CustomizationUIGeneratorEditor : Editor
         int undoGroup = Undo.GetCurrentGroup();
 
         ClearUI(gen);
-
         List<GameObject> createdPanels = new List<GameObject>();
 
         for (int catIndex = 0; catIndex < gen.categories.Count; catIndex++)
@@ -85,13 +78,12 @@ public class CustomizationUIGeneratorEditor : Editor
             var category = gen.categories[catIndex];
             if (category == null) continue;
 
-            // 1. Création de l'onglet (Tab)
+            // 1. Onglet (Tab)
             GameObject tabObj = InstantiatePrefabWithUndo(gen.tabButtonPrefab, gen.tabsContainer, $"Tab_{category.categoryName}");
             if (tabObj != null)
             {
                 SetTMPText(tabObj, category.categoryName);
-                if (category.categoryIcon != null)
-                    SetButtonIcon(tabObj, category.categoryIcon);
+                if (category.categoryIcon != null) SetButtonIcon(tabObj, category.categoryIcon);
 
                 CategoryTabButton tabBtn = tabObj.GetComponent<CategoryTabButton>();
                 if (tabBtn != null)
@@ -102,7 +94,7 @@ public class CustomizationUIGeneratorEditor : Editor
                 }
             }
 
-            // 2. Création du panneau de catégorie (Category Panel Prefab)
+            // 2. Panneau de catégorie
             GameObject panelObj = InstantiatePrefabWithUndo(gen.categoryPanelPrefab, gen.panelsContainer, $"Panel_{category.categoryName}");
             if (panelObj == null) continue;
             createdPanels.Add(panelObj);
@@ -110,15 +102,17 @@ public class CustomizationUIGeneratorEditor : Editor
             Transform contentRoot = FindChildByPathOrSelf(panelObj.transform, gen.panelContentPath);
             ClearChildrenImmediate(contentRoot);
 
-            // 3. Génération des éléments de la catégorie
+            // 3. Éléments de la catégorie
             foreach (var element in category.elements)
             {
-                // A. TITLE (Nom de l'élément)
                 GameObject titleObj = InstantiatePrefabWithUndo(gen.elementTitlePrefab, contentRoot, $"Title_{element.elementName}");
                 SetTMPText(titleObj, element.elementName);
 
-                // B. SUBTITLE + GRID LAYOUT : SHAPES (Meshes 3D)
-                if (element.shapes != null && element.shapes.Count > 0)
+                bool hasMesh = element.contentType == CustomizationCategoryData.ElementContentType.MeshOnly ||
+                               element.contentType == CustomizationCategoryData.ElementContentType.MeshAndShader;
+
+                // A. SHAPES PRINCIPALES
+                if (hasMesh && element.shapes != null && element.shapes.Count > 0)
                 {
                     GameObject subShapes = InstantiatePrefabWithUndo(gen.subtitlePrefab, contentRoot, $"Subtitle_{element.shapesSubtitle}");
                     SetTMPText(subShapes, element.shapesSubtitle);
@@ -127,13 +121,35 @@ public class CustomizationUIGeneratorEditor : Editor
                     Transform gridParent = gridShapes != null ? gridShapes.transform : contentRoot;
 
                     foreach (var shape in element.shapes)
-                    {
-                        CreateMeshButton(gen, gridParent, element, shape);
-                    }
+                        CreateMeshButton(gen, gridParent, element.targetMeshSlot, shape, element.cameraFocus);
                 }
 
-                // C. SUBTITLE + GRID LAYOUT : PATTERNS (Textures / Masques Shader)
-                if (element.patterns != null && element.patterns.Count > 0)
+                // B. SHAPES SECONDAIRES (ex: Forelock dans Mane)
+                if (hasMesh && element.hasSecondaryShapes && element.secondaryShapes != null && element.secondaryShapes.Count > 0)
+                {
+                    GameObject subSec = InstantiatePrefabWithUndo(gen.subtitlePrefab, contentRoot, $"Subtitle_{element.secondaryShapesSubtitle}");
+                    SetTMPText(subSec, element.secondaryShapesSubtitle);
+
+                    GameObject gridSec = InstantiatePrefabWithUndo(gen.gridLayoutPrefab, contentRoot, $"Grid_{element.secondaryShapesSubtitle}");
+                    Transform gridParent = gridSec != null ? gridSec.transform : contentRoot;
+
+                    foreach (var shape in element.secondaryShapes)
+                        CreateMeshButton(gen, gridParent, element.secondaryMeshSlot, shape, element.cameraFocus);
+                }
+
+                // C. SÉLECTEUR DE PATTES + PATTERNS (ShaderOnly et MeshAndShader)
+                LegsPatternSelector spawnedLegsSelector = null;
+                if (element.contentType == CustomizationCategoryData.ElementContentType.ShaderOnly && element.isLegsPatternElement && gen.legsSelectorPrefab != null)
+                {
+                    GameObject selectorObj = InstantiatePrefabWithUndo(gen.legsSelectorPrefab, contentRoot, "LegsPatternSelector");
+                    if (selectorObj != null)
+                        spawnedLegsSelector = selectorObj.GetComponent<LegsPatternSelector>();
+                }
+
+                bool hasPattern = element.contentType == CustomizationCategoryData.ElementContentType.ShaderOnly ||
+                                  element.contentType == CustomizationCategoryData.ElementContentType.MeshAndShader;
+
+                if (hasPattern && element.patterns != null && element.patterns.Count > 0)
                 {
                     GameObject subPatterns = InstantiatePrefabWithUndo(gen.subtitlePrefab, contentRoot, $"Subtitle_{element.patternsSubtitle}");
                     SetTMPText(subPatterns, element.patternsSubtitle);
@@ -142,12 +158,10 @@ public class CustomizationUIGeneratorEditor : Editor
                     Transform gridParent = gridPatterns != null ? gridPatterns.transform : contentRoot;
 
                     foreach (var pattern in element.patterns)
-                    {
                         CreatePatternButton(gen, gridParent, element, pattern);
-                    }
                 }
 
-                // D. SUBTITLE + LAYOUT_COLORS + COLOR PICKER
+                // D. COULEURS + COLOR PICKER
                 var colSettings = element.colorSettings;
                 if (colSettings != null && colSettings.hasColors && colSettings.colorChannels != null && colSettings.colorChannels.Count > 0)
                 {
@@ -157,26 +171,34 @@ public class CustomizationUIGeneratorEditor : Editor
                     GameObject colorsLayoutObj = InstantiatePrefabWithUndo(gen.layoutColorsPrefab, contentRoot, $"Layout_Colors_{element.elementName}");
                     Transform colorsParent = colorsLayoutObj != null ? colorsLayoutObj.transform : contentRoot;
 
-                    if (colorsLayoutObj != null)
-                        ClearChildrenImmediate(colorsParent);
+                    if (colorsLayoutObj != null) ClearChildrenImmediate(colorsParent);
 
                     GameObject swatchPrefab = colSettings.colorButtonPrefab != null ? colSettings.colorButtonPrefab : gen.colorSwatchButtonPrefab;
                     GameObject wheelPrefab = colSettings.colorPickerPrefab != null ? colSettings.colorPickerPrefab : gen.colorWheelPrefab;
 
+                    CustomizationButton firstSwatch = null;
                     foreach (var channel in colSettings.colorChannels)
                     {
-                        CreateColorSwatchButton(swatchPrefab, colorsParent, element.targetMaterialZone, channel);
+                        var createdSwatch = CreateColorSwatchButton(swatchPrefab, colorsParent, element.targetMaterialZone, channel, element.isLegsPatternElement, element.cameraFocus);
+                        if (firstSwatch == null) firstSwatch = createdSwatch;
                     }
 
+                    CustomColorWheel spawnedWheel = null;
                     if (wheelPrefab != null)
                     {
-                        InstantiatePrefabWithUndo(wheelPrefab, contentRoot, $"ColorPicker_{element.elementName}");
+                        GameObject wheelObj = InstantiatePrefabWithUndo(wheelPrefab, contentRoot, $"ColorPicker_{element.elementName}");
+                        if (wheelObj != null) spawnedWheel = wheelObj.GetComponent<CustomColorWheel>();
+                    }
+
+                    if (spawnedLegsSelector != null && firstSwatch != null)
+                    {
+                        spawnedLegsSelector.BindColorControls(firstSwatch, spawnedWheel);
+                        EditorUtility.SetDirty(spawnedLegsSelector);
                     }
                 }
             }
         }
 
-        // 4. Remplissage automatique de la liste cachée categoryPanels sur CustomizationUIGenerator
         SerializedObject genSO = new SerializedObject(gen);
         SerializedProperty panelsProp = genSO.FindProperty("categoryPanels");
         if (panelsProp != null)
@@ -190,28 +212,21 @@ public class CustomizationUIGeneratorEditor : Editor
             genSO.ApplyModifiedPropertiesWithoutUndo();
         }
 
-        // 5. Recalcul immédiat des hauteurs (ContentSizeFitter) hors Play Mode
         Canvas.ForceUpdateCanvases();
         foreach (var panel in createdPanels)
         {
-            if (panel != null)
-            {
-                Transform contentRoot = FindChildByPathOrSelf(panel.transform, gen.panelContentPath);
-                if (contentRoot != null && contentRoot.TryGetComponent<RectTransform>(out var contentRect))
-                    LayoutRebuilder.ForceRebuildLayoutImmediate(contentRect);
-
-                if (panel.TryGetComponent<RectTransform>(out var panelRect))
-                    LayoutRebuilder.ForceRebuildLayoutImmediate(panelRect);
-            }
+            if (panel == null) continue;
+            Transform contentRoot = FindChildByPathOrSelf(panel.transform, gen.panelContentPath);
+            if (contentRoot != null && contentRoot.TryGetComponent<RectTransform>(out var contentRect))
+                LayoutRebuilder.ForceRebuildLayoutImmediate(contentRect);
+            if (panel.TryGetComponent<RectTransform>(out var panelRect))
+                LayoutRebuilder.ForceRebuildLayoutImmediate(panelRect);
         }
 
-        // 6. Masquer les panneaux inactifs (seul le 1er reste actif)
         if (gen.hideInactivePanels)
         {
             for (int i = 0; i < createdPanels.Count; i++)
-            {
                 createdPanels[i].SetActive(i == 0);
-            }
         }
 
         Undo.CollapseUndoOperations(undoGroup);
@@ -222,61 +237,43 @@ public class CustomizationUIGeneratorEditor : Editor
         Debug.Log($"[CustomizationUIGenerator] UI générée avec succès ({createdPanels.Count} catégories).");
     }
 
-    private void CreateMeshButton(
-        CustomizationUIGenerator gen,
-        Transform parent,
-        CustomizationCategoryData.CustomizationElement element,
-        CustomizationCategoryData.MeshShapeOption shape)
+    private void CreateMeshButton(CustomizationUIGenerator gen, Transform parent, Swapper.SlotType slot, CustomizationCategoryData.MeshShapeOption shape, CustomizationCategoryData.CameraFocusZone camZone)
     {
         if (gen.meshPreviewButtonPrefab == null) return;
-
         GameObject btnObj = InstantiatePrefabWithUndo(gen.meshPreviewButtonPrefab, parent, $"Btn_Shape_{shape.shapeName}");
         ApplyButtonVisuals(btnObj, shape.shapeName, shape.previewIcon);
 
-        MeshPreviewButton meshBtn = btnObj.GetComponent<MeshPreviewButton>();
-        if (meshBtn != null)
+        if (btnObj.TryGetComponent<CustomizationButton>(out var meshBtn))
         {
-            meshBtn.Setup(element.targetMeshSlot, shape);
+            meshBtn.SetupAsMesh(slot, shape, camZone);
             EditorUtility.SetDirty(meshBtn);
             PrefabUtility.RecordPrefabInstancePropertyModifications(meshBtn);
         }
     }
 
-    private void CreatePatternButton(
-        CustomizationUIGenerator gen,
-        Transform parent,
-        CustomizationCategoryData.CustomizationElement element,
-        CustomizationCategoryData.PatternOption pattern)
+    private void CreatePatternButton(CustomizationUIGenerator gen, Transform parent, CustomizationCategoryData.CustomizationElement element, CustomizationCategoryData.PatternOption pattern)
     {
         if (gen.patternPreviewButtonPrefab == null) return;
-
         GameObject btnObj = InstantiatePrefabWithUndo(gen.patternPreviewButtonPrefab, parent, $"Btn_Pattern_{pattern.patternName}");
         ApplyButtonVisuals(btnObj, pattern.patternName, pattern.previewIcon);
 
-        PatternPreviewButton patternBtn = btnObj.GetComponent<PatternPreviewButton>();
-        if (patternBtn != null)
+        if (btnObj.TryGetComponent<CustomizationButton>(out var patternBtn))
         {
-            patternBtn.Setup(element.targetMaterialZone, pattern, element.supportsFourLegsSync);
+            patternBtn.SetupAsPattern(element.targetMaterialZone, pattern, element.isLegsPatternElement, element.cameraFocus);
             EditorUtility.SetDirty(patternBtn);
             PrefabUtility.RecordPrefabInstancePropertyModifications(patternBtn);
         }
     }
 
-    private void CreateColorSwatchButton(
-        GameObject prefab,
-        Transform parent,
-        Swapper.MaterialZone zone,
-        CustomizationCategoryData.ColorChannel channel)
+    private CustomizationButton CreateColorSwatchButton(GameObject prefab, Transform parent, Swapper.MaterialZone zone, CustomizationCategoryData.ColorChannel channel, bool isLegsPattern, CustomizationCategoryData.CameraFocusZone camZone)
     {
-        if (prefab == null) return;
-
+        if (prefab == null) return null;
         GameObject swatchObj = InstantiatePrefabWithUndo(prefab, parent, $"Button_Color_{channel.colorName}");
         ApplyButtonVisuals(swatchObj, channel.colorName, null);
 
-        ColorSwatchButton swatchBtn = swatchObj.GetComponent<ColorSwatchButton>();
-        if (swatchBtn != null)
+        if (swatchObj.TryGetComponent<CustomizationButton>(out var swatchBtn))
         {
-            swatchBtn.Setup(zone, channel);
+            swatchBtn.SetupAsColorSwatch(zone, channel, isLegsPattern, camZone);
 
             SerializedObject so = new SerializedObject(swatchBtn);
             SerializedProperty previewImgProp = so.FindProperty("swatchPreviewImage");
@@ -289,7 +286,9 @@ public class CustomizationUIGeneratorEditor : Editor
 
             EditorUtility.SetDirty(swatchBtn);
             PrefabUtility.RecordPrefabInstancePropertyModifications(swatchBtn);
+            return swatchBtn;
         }
+        return null;
     }
 
     private void SetTMPText(GameObject obj, string text)
@@ -308,7 +307,6 @@ public class CustomizationUIGeneratorEditor : Editor
     private void SetButtonIcon(GameObject btnObj, Sprite icon)
     {
         if (btnObj == null) return;
-
         Transform previewTransform = btnObj.transform.Find("Preview");
         if (previewTransform == null)
         {
@@ -322,15 +320,10 @@ public class CustomizationUIGeneratorEditor : Editor
             }
         }
 
-        Image previewImage = null;
-        if (previewTransform != null)
+        Image previewImage = previewTransform != null ? previewTransform.GetComponent<Image>() : null;
+        if (previewImage == null)
         {
-            previewImage = previewTransform.GetComponent<Image>();
-        }
-        else
-        {
-            Image[] images = btnObj.GetComponentsInChildren<Image>(true);
-            foreach (Image img in images)
+            foreach (Image img in btnObj.GetComponentsInChildren<Image>(true))
             {
                 if (img.gameObject != btnObj &&
                     !img.gameObject.name.Equals("Outline", System.StringComparison.OrdinalIgnoreCase) &&

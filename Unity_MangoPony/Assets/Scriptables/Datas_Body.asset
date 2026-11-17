@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CustomizationCategoryData
   categoryName: Body
   categoryIcon: {fileID: 0}
-  cameraFocus: 1
+  defaultCategoryCamera: 0
   elements:
-  - elementName: Body Type
+  - elementName: Body Shape
+    contentType: 0
+    cameraFocus: 0
     targetMeshSlot: 0
-    targetMaterialZone: 0
-    supportsFourLegsSync: 0
     shapesSubtitle: Shapes
     defaultShapeIndex: 0
     shapes:
@@ -32,41 +32,69 @@ MonoBehaviour:
     - shapeName: Slim
       previewIcon: {fileID: 6073655841404583815, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
       meshPrefab: {fileID: 9179952281599920403, guid: 8ddd8ea970e49b3439a3a20835bf8d55, type: 3}
-    patternsSubtitle: Body Pattern
-    defaultPatternIndex: 0
-    patterns:
-    - patternName: None
-      previewIcon: {fileID: 0}
-      patternTexture: {fileID: 0}
-    - patternName: Caped
-      previewIcon: {fileID: 0}
-      patternTexture: {fileID: 2800000, guid: 177d68c0ca12b0347aee9eeb9d7239e3, type: 3}
-    - patternName: MiniTobiano
-      previewIcon: {fileID: 0}
-      patternTexture: {fileID: 2800000, guid: fcb24b7bb4adbcf40bef0284db528918, type: 3}
-    - patternName: Tobiano
-      previewIcon: {fileID: 0}
-      patternTexture: {fileID: 2800000, guid: fcb24b7bb4adbcf40bef0284db528918, type: 3}
-    - patternName: Appaloosa
-      previewIcon: {fileID: 0}
-      patternTexture: {fileID: 2800000, guid: 438028ec536bebb459464ba3e6831700, type: 3}
+    hasSecondaryShapes: 0
+    secondaryMeshSlot: 5
+    secondaryShapesSubtitle: Forelock
+    defaultSecondaryShapeIndex: -1
+    secondaryShapes: []
+    targetMaterialZone: 0
+    isLegsPatternElement: 0
+    patternsSubtitle: Patterns
+    defaultPatternIndex: -1
+    patterns: []
     colorsSubtitle: Colors
     colorSettings:
-      hasColors: 1
+      hasColors: 0
       colorButtonPrefab: {fileID: 0}
       colorPickerPrefab: {fileID: 0}
-      colorChannels:
-      - colorName: Coat Main Color
-        shaderPropertyName: _BaseColor
-        defaultColor: {r: 0.76, g: 0.54, b: 0.36, a: 1}
-  - elementName: Coat Nuances
+      colorChannels: []
+  - elementName: Head Shape
+    contentType: 0
+    cameraFocus: 1
+    targetMeshSlot: 1
+    shapesSubtitle: Shapes
+    defaultShapeIndex: 0
+    shapes:
+    - shapeName: Base
+      previewIcon: {fileID: -3857524736168155669, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
+      meshPrefab: {fileID: 3003042729001550199, guid: 3391fb5ea7e5ce64595d16e039bc0bf7, type: 3}
+    - shapeName: Slim
+      previewIcon: {fileID: -8762355994922106162, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
+      meshPrefab: {fileID: 3807561072853785953, guid: 7ca330ee1989d6d44bd1b795da684cc8, type: 3}
+    - shapeName: Draft
+      previewIcon: {fileID: 1147731633064757759, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
+      meshPrefab: {fileID: 4946495741292686056, guid: bcb87f62ca557ce499962c15ff5bd25e, type: 3}
+    hasSecondaryShapes: 0
+    secondaryMeshSlot: 5
+    secondaryShapesSubtitle: Forelock
+    defaultSecondaryShapeIndex: -1
+    secondaryShapes: []
+    targetMaterialZone: 2
+    isLegsPatternElement: 0
+    patternsSubtitle: Patterns
+    defaultPatternIndex: -1
+    patterns: []
+    colorsSubtitle: Colors
+    colorSettings:
+      hasColors: 0
+      colorButtonPrefab: {fileID: 0}
+      colorPickerPrefab: {fileID: 0}
+      colorChannels: []
+  - elementName: Color Repartition
+    contentType: 1
+    cameraFocus: 0
     targetMeshSlot: 0
-    targetMaterialZone: 1
-    supportsFourLegsSync: 0
     shapesSubtitle: Shapes
     defaultShapeIndex: -1
     shapes: []
-    patternsSubtitle: Patterns
+    hasSecondaryShapes: 0
+    secondaryMeshSlot: 5
+    secondaryShapesSubtitle: Forelock
+    defaultSecondaryShapeIndex: -1
+    secondaryShapes: []
+    targetMaterialZone: 1
+    isLegsPatternElement: 0
+    patternsSubtitle: Repartition Texture
     defaultPatternIndex: 0
     patterns:
     - patternName: Solid
@@ -87,26 +115,112 @@ MonoBehaviour:
       colorButtonPrefab: {fileID: 0}
       colorPickerPrefab: {fileID: 0}
       colorChannels:
-      - colorName: Nuance Color
+      - colorName: Coat Color
+        shaderPropertyName: _BaseColor
+        defaultColor: {r: 0.76, g: 0.54, b: 0.36, a: 1}
+      - colorName: Variant Color
         shaderPropertyName: _NuanceColor
         defaultColor: {r: 0.88, g: 0.78, b: 0.65, a: 1}
-  - elementName: Legs
-    targetMeshSlot: 2
-    targetMaterialZone: 3
-    supportsFourLegsSync: 0
+  - elementName: Body Pattern
+    contentType: 1
+    cameraFocus: 0
+    targetMeshSlot: 0
     shapesSubtitle: Shapes
-    defaultShapeIndex: 0
-    shapes:
-    - shapeName: Base
-      previewIcon: {fileID: 746843545963474028, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
-      meshPrefab: {fileID: 1366074872888762623, guid: e844a31857b9af946ac8965ce27f80b0, type: 3}
-    - shapeName: Slim
-      previewIcon: {fileID: -6783563537083282260, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
-      meshPrefab: {fileID: 3242820722354682607, guid: cf0d60b619571184fb7f7cc66ba809d5, type: 3}
-    - shapeName: Draft
-      previewIcon: {fileID: 8425432924880420005, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
-      meshPrefab: {fileID: 2724616053684178005, guid: 278756034beaead4783b3a1992c2e908, type: 3}
-    patternsSubtitle: Patterns
+    defaultShapeIndex: -1
+    shapes: []
+    hasSecondaryShapes: 0
+    secondaryMeshSlot: 5
+    secondaryShapesSubtitle: Forelock
+    defaultSecondaryShapeIndex: -1
+    secondaryShapes: []
+    targetMaterialZone: 0
+    isLegsPatternElement: 0
+    patternsSubtitle: Pattern Texture
+    defaultPatternIndex: 0
+    patterns:
+    - patternName: None
+      previewIcon: {fileID: -2448051357591836136, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
+      patternTexture: {fileID: 0}
+    - patternName: Caped
+      previewIcon: {fileID: 5332561770373008783, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
+      patternTexture: {fileID: 2800000, guid: 177d68c0ca12b0347aee9eeb9d7239e3, type: 3}
+    - patternName: MiniTobiano
+      previewIcon: {fileID: 5045598883836856429, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
+      patternTexture: {fileID: 2800000, guid: fcb24b7bb4adbcf40bef0284db528918, type: 3}
+    - patternName: Tobiano
+      previewIcon: {fileID: 3482039982310036012, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
+      patternTexture: {fileID: 2800000, guid: fcb24b7bb4adbcf40bef0284db528918, type: 3}
+    - patternName: Appaloosa
+      previewIcon: {fileID: -1847812161318664106, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
+      patternTexture: {fileID: 2800000, guid: 438028ec536bebb459464ba3e6831700, type: 3}
+    colorsSubtitle: Colors
+    colorSettings:
+      hasColors: 1
+      colorButtonPrefab: {fileID: 0}
+      colorPickerPrefab: {fileID: 0}
+      colorChannels:
+      - colorName: Pattern Color
+        shaderPropertyName: _PatternColor
+        defaultColor: {r: 0.96, g: 0.94, b: 0.9, a: 1}
+  - elementName: Head Pattern
+    contentType: 1
+    cameraFocus: 1
+    targetMeshSlot: 1
+    shapesSubtitle: Shapes
+    defaultShapeIndex: -1
+    shapes: []
+    hasSecondaryShapes: 0
+    secondaryMeshSlot: 5
+    secondaryShapesSubtitle: Forelock
+    defaultSecondaryShapeIndex: -1
+    secondaryShapes: []
+    targetMaterialZone: 2
+    isLegsPatternElement: 0
+    patternsSubtitle: Pattern Texture
+    defaultPatternIndex: 0
+    patterns:
+    - patternName: None
+      previewIcon: {fileID: -3761132709796100516, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
+      patternTexture: {fileID: 0}
+    - patternName: Star Liste
+      previewIcon: {fileID: 8132146252756318604, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
+      patternTexture: {fileID: 2800000, guid: 7842dfd025c2ba44593f410c1390a275, type: 3}
+    - patternName: Liste Large
+      previewIcon: {fileID: 1520724620586577690, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
+      patternTexture: {fileID: 2800000, guid: 52861c0900303a249adabe6b9cdea5c3, type: 3}
+    - patternName: Liste Fine
+      previewIcon: {fileID: -2033990380715919382, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
+      patternTexture: {fileID: 2800000, guid: 964af7bed669b5249a5e418def681357, type: 3}
+    - patternName: Pelotte
+      previewIcon: {fileID: 8330491607419113501, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
+      patternTexture: {fileID: 2800000, guid: 52861c0900303a249adabe6b9cdea5c3, type: 3}
+    - patternName: Star
+      previewIcon: {fileID: 2341797579187666, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
+      patternTexture: {fileID: 2800000, guid: 7842dfd025c2ba44593f410c1390a275, type: 3}
+    colorsSubtitle: Colors
+    colorSettings:
+      hasColors: 1
+      colorButtonPrefab: {fileID: 0}
+      colorPickerPrefab: {fileID: 0}
+      colorChannels:
+      - colorName: Pattern Color
+        shaderPropertyName: _PatternColor
+        defaultColor: {r: 0.98, g: 0.97, b: 0.95, a: 1}
+  - elementName: Legs Pattern
+    contentType: 1
+    cameraFocus: 2
+    targetMeshSlot: 2
+    shapesSubtitle: Shapes
+    defaultShapeIndex: -1
+    shapes: []
+    hasSecondaryShapes: 0
+    secondaryMeshSlot: 5
+    secondaryShapesSubtitle: Forelock
+    defaultSecondaryShapeIndex: -1
+    secondaryShapes: []
+    targetMaterialZone: 3
+    isLegsPatternElement: 1
+    patternsSubtitle: Pattern Texture
     defaultPatternIndex: 0
     patterns:
     - patternName: None
@@ -130,13 +244,13 @@ MonoBehaviour:
       colorButtonPrefab: {fileID: 0}
       colorPickerPrefab: {fileID: 0}
       colorChannels:
-      - colorName: Leg Mark Color
+      - colorName: Pattern Color
         shaderPropertyName: _LegMarkColor
         defaultColor: {r: 0.98, g: 0.97, b: 0.95, a: 1}
-  - elementName: Legs
+  - elementName: Hooves
+    contentType: 0
+    cameraFocus: 2
     targetMeshSlot: 2
-    targetMaterialZone: 3
-    supportsFourLegsSync: 0
     shapesSubtitle: Shapes
     defaultShapeIndex: 0
     shapes:
@@ -149,30 +263,22 @@ MonoBehaviour:
     - shapeName: Draft
       previewIcon: {fileID: 8425432924880420005, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
       meshPrefab: {fileID: 2724616053684178005, guid: 278756034beaead4783b3a1992c2e908, type: 3}
+    hasSecondaryShapes: 0
+    secondaryMeshSlot: 5
+    secondaryShapesSubtitle: Forelock
+    defaultSecondaryShapeIndex: -1
+    secondaryShapes: []
+    targetMaterialZone: 11
+    isLegsPatternElement: 0
     patternsSubtitle: Patterns
-    defaultPatternIndex: 0
-    patterns:
-    - patternName: None
-      previewIcon: {fileID: 2578623089327073496, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
-      patternTexture: {fileID: 0}
-    - patternName: Long Balzanne
-      previewIcon: {fileID: 91470800464861876, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
-      patternTexture: {fileID: 2800000, guid: 208d2344454b20e4290d143838736cc2, type: 3}
-    - patternName: Medium Balzanne
-      previewIcon: {fileID: -8279612462302189904, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
-      patternTexture: {fileID: 2800000, guid: cd842ff3d2001214a8a52f209fe7acf0, type: 3}
-    - patternName: Small Balzanne
-      previewIcon: {fileID: -4508226223089859040, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
-      patternTexture: {fileID: 2800000, guid: c4d3f50e96cbd784ab06e0cf97717821, type: 3}
-    - patternName: Crown
-      previewIcon: {fileID: 5132398212834887724, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
-      patternTexture: {fileID: 2800000, guid: de52a5a8c83aa2b4588910be8805c67b, type: 3}
+    defaultPatternIndex: -1
+    patterns: []
     colorsSubtitle: Colors
     colorSettings:
       hasColors: 1
       colorButtonPrefab: {fileID: 0}
       colorPickerPrefab: {fileID: 0}
       colorChannels:
-      - colorName: Leg Mark Color
-        shaderPropertyName: _LegMarkColor
-        defaultColor: {r: 0.98, g: 0.97, b: 0.95, a: 1}
+      - colorName: Color
+        shaderPropertyName: _BaseColor
+        defaultColor: {r: 0.25, g: 0.22, b: 0.2, a: 1}

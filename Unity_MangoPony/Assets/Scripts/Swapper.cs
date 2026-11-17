@@ -11,7 +11,9 @@ public class Swapper : MonoBehaviour
         Body,
         Head,
         Legs,
+        Hooves,
         Mane,
+        Forelock,
         Tail,
         Horn,
         Wings
@@ -26,19 +28,20 @@ public class Swapper : MonoBehaviour
         FrontRightLeg,    // Patte avant droite
         BackLeftLeg,      // Patte arrière gauche
         BackRightLeg,     // Patte arrière droite
-        ManePattern,      // Motif crinière
-        TailPattern       // Motif queue
+        ManePattern,      // Crinière + Toupet (partagent le même matériau)
+        TailPattern,      // Queue
+        HornColor,        // Corne
+        WingsColor,       // Ailes
+        HoovesColor       // Sabots
     }
 
     [System.Serializable]
     public struct SlotBinding
     {
         public SlotType slotType;
-
         [Tooltip("Point d'ancrage / parent dans la hiérarchie du poney")]
         public Transform parentBone;
-
-        [Tooltip("Objet déjà présent dans la scène au démarrage (ex: Body, Tail...) qui sera remplacé lors du swap")]
+        [Tooltip("Objet déjà présent dans la scène au démarrage qui sera remplacé lors du swap")]
         public GameObject initialSceneObject;
     }
 
@@ -64,21 +67,20 @@ public class Swapper : MonoBehaviour
 
     [Header("1. Configuration des Meshes Modulaires")]
     [SerializeField] private List<SlotBinding> slotBindings = new List<SlotBinding>();
-
-    [Tooltip("Optionnel : le SkinnedMeshRenderer principal du poney pour transférer les bones aux pièces riggées")]
     [SerializeField] private SkinnedMeshRenderer referenceRigRenderer;
 
     [Header("2. Configuration des Zones de Shaders")]
     [SerializeField] private List<MaterialZoneBinding> zoneBindings = new List<MaterialZoneBinding>();
 
     [Header("3. Transition des Motifs (DOTween)")]
-    [Tooltip("Durée totale de la transition (moitié fade-out, moitié fade-in)")]
     [SerializeField] private float patternTransitionDuration = 0.3f;
     [SerializeField] private Ease patternEase = Ease.InOutSine;
 
     private Dictionary<SlotType, GameObject> currentEquippedObjects = new Dictionary<SlotType, GameObject>();
     private Dictionary<MaterialZone, Sequence> activePatternSequences = new Dictionary<MaterialZone, Sequence>();
     private Dictionary<string, Transform> rigBoneMap;
+    private Dictionary<MaterialZone, Texture> currentZoneTextures = new Dictionary<MaterialZone, Texture>();
+    private Dictionary<(MaterialZone, string), Color> currentZoneColors = new Dictionary<(MaterialZone, string), Color>();
 
     private void Awake()
     {
@@ -92,17 +94,12 @@ public class Swapper : MonoBehaviour
             InitializeFromCategories();
     }
 
-    /// <summary>
-    /// Enregistre les objets déjà présents dans la scène pour qu'ils soient détruits au premier remplacement.
-    /// </summary>
     private void RegisterInitialSceneObjects()
     {
         foreach (var binding in slotBindings)
         {
             if (binding.initialSceneObject != null && !currentEquippedObjects.ContainsKey(binding.slotType))
-            {
                 currentEquippedObjects[binding.slotType] = binding.initialSceneObject;
-            }
         }
     }
 
@@ -126,29 +123,48 @@ public class Swapper : MonoBehaviour
 
             foreach (var element in category.elements)
             {
-                // 1. Équipe le Mesh par défaut
-                if (element.shapes != null && element.defaultShapeIndex >= 0 && element.defaultShapeIndex < element.shapes.Count)
-                {
-                    SwapSlotMesh(element.targetMeshSlot, element.shapes[element.defaultShapeIndex].meshPrefab);
-                }
+                bool hasMesh = element.contentType == CustomizationCategoryData.ElementContentType.MeshOnly ||
+                               element.contentType == CustomizationCategoryData.ElementContentType.MeshAndShader;
 
-                // 2. Applique le Pattern par défaut uniquement s'il y a une texture et que la zone est configurée
-                if (element.patterns != null && element.defaultPatternIndex >= 0 && element.defaultPatternIndex < element.patterns.Count)
+                if (hasMesh)
                 {
-                    Texture defaultTex = element.patterns[element.defaultPatternIndex].patternTexture;
-                    if (defaultTex != null)
+                    if (element.shapes != null && element.defaultShapeIndex >= 0 && element.defaultShapeIndex < element.shapes.Count)
+                        SwapSlotMesh(element.targetMeshSlot, element.shapes[element.defaultShapeIndex].meshPrefab);
+
+                    if (element.hasSecondaryShapes && element.secondaryShapes != null &&
+                        element.defaultSecondaryShapeIndex >= 0 && element.defaultSecondaryShapeIndex < element.secondaryShapes.Count)
                     {
-                        if (element.supportsFourLegsSync) SwapAllLegsPattern(defaultTex);
-                        else SwapPatternTexture(element.targetMaterialZone, defaultTex);
+                        SwapSlotMesh(element.secondaryMeshSlot, element.secondaryShapes[element.defaultSecondaryShapeIndex].meshPrefab);
                     }
                 }
 
-                // 3. Applique les Couleurs par défaut
+                if (element.contentType != CustomizationCategoryData.ElementContentType.MeshOnly &&
+                    element.patterns != null && element.defaultPatternIndex >= 0 && element.defaultPatternIndex < element.patterns.Count)
+                {
+                    Texture defaultTex = element.patterns[element.defaultPatternIndex].patternTexture;
+                    if (element.isLegsPatternElement)
+                    {
+                        SwapZonesPattern(new[] { MaterialZone.FrontLeftLeg, MaterialZone.FrontRightLeg, MaterialZone.BackLeftLeg, MaterialZone.BackRightLeg }, defaultTex);
+                    }
+                    else
+                    {
+                        SwapPatternTexture(element.targetMaterialZone, defaultTex);
+                    }
+                }
+
                 if (element.colorSettings != null && element.colorSettings.hasColors)
                 {
                     foreach (var channel in element.colorSettings.colorChannels)
                     {
-                        SwapZoneColor(element.targetMaterialZone, channel.defaultColor, channel.shaderPropertyName);
+                        if (element.isLegsPatternElement)
+                        {
+                            SwapZonesColor(new[] { MaterialZone.FrontLeftLeg, MaterialZone.FrontRightLeg, MaterialZone.BackLeftLeg, MaterialZone.BackRightLeg },
+                                           channel.defaultColor, channel.shaderPropertyName);
+                        }
+                        else
+                        {
+                            SwapZoneColor(element.targetMaterialZone, channel.defaultColor, channel.shaderPropertyName);
+                        }
                     }
                 }
             }
@@ -157,22 +173,15 @@ public class Swapper : MonoBehaviour
 
     #region Mesh Swapping
 
-    /// <summary>
-    /// Remplace le prefab actuellement équipé sur un emplacement spécifique (et détruit l'ancien, même si newPrefab est null).
-    /// </summary>
     public void SwapSlotMesh(SlotType slot, GameObject newPrefab)
     {
-        // 1. Supprime l'objet actuel (qu'il vienne de la scène initiale ou d'un swap précédent)
         if (currentEquippedObjects.TryGetValue(slot, out GameObject oldObj) && oldObj != null)
-        {
             Destroy(oldObj);
-        }
+
         currentEquippedObjects.Remove(slot);
 
-        // 2. Si "None" (ex: Tail_None -> meshPrefab == null), on s'arrête ici : il n'y a plus rien !
         if (newPrefab == null) return;
 
-        // 3. Instancie la nouvelle variante au bon endroit
         Transform parentAnchor = GetParentAnchor(slot);
         Transform targetParent = parentAnchor != null ? parentAnchor : transform;
 
@@ -182,10 +191,65 @@ public class Swapper : MonoBehaviour
         newObj.transform.localRotation = Quaternion.identity;
         newObj.transform.localScale = Vector3.one;
 
-        // 4. Si le prefab contient un SkinnedMeshRenderer, on le raccorde au squelette du poney
         RebindSkinnedMeshesToRig(newObj);
-
         currentEquippedObjects[slot] = newObj;
+
+        // Synchronise les Renderers dynamiques avec la zone matérielle correspondante
+        SyncDynamicSlotRenderers(slot, newObj);
+    }
+
+    private void SyncDynamicSlotRenderers(SlotType slot, GameObject newObj)
+    {
+        MaterialZone? targetZone = slot switch
+        {
+            SlotType.Mane => MaterialZone.ManePattern,
+            SlotType.Forelock => MaterialZone.ManePattern,
+            SlotType.Tail => MaterialZone.TailPattern,
+            SlotType.Horn => MaterialZone.HornColor,
+            SlotType.Wings => MaterialZone.WingsColor,
+            SlotType.Hooves => MaterialZone.HoovesColor,
+            _ => null
+        };
+
+        if (!targetZone.HasValue) return;
+
+        Renderer[] newRenderers = newObj.GetComponentsInChildren<Renderer>(true);
+        if (newRenderers.Length == 0) return;
+
+        for (int i = 0; i < zoneBindings.Count; i++)
+        {
+            if (zoneBindings[i].zone != targetZone.Value) continue;
+
+            var binding = zoneBindings[i];
+            binding.targetRenderers.RemoveAll(r => r == null);
+
+            // Récupère l'instance de matériau existante (ex: pour que Forelock partage exactement le matériau de Mane)
+            Material sharedRuntimeMat = null;
+            foreach (var existingRend in binding.targetRenderers)
+            {
+                if (existingRend != null && binding.materialIndex < existingRend.materials.Length)
+                {
+                    sharedRuntimeMat = existingRend.materials[binding.materialIndex];
+                    break;
+                }
+            }
+
+            foreach (var rend in newRenderers)
+            {
+                if (sharedRuntimeMat != null && binding.materialIndex < rend.materials.Length)
+                {
+                    Material[] mats = rend.materials;
+                    mats[binding.materialIndex] = sharedRuntimeMat;
+                    rend.materials = mats;
+                }
+
+                if (!binding.targetRenderers.Contains(rend))
+                    binding.targetRenderers.Add(rend);
+            }
+
+            zoneBindings[i] = binding;
+            break;
+        }
     }
 
     private void RebindSkinnedMeshesToRig(GameObject instance)
@@ -218,11 +282,8 @@ public class Swapper : MonoBehaviour
         {
             if (binding.slotType == slot)
             {
-                if (binding.parentBone != null)
-                    return binding.parentBone;
-
-                if (binding.initialSceneObject != null)
-                    return binding.initialSceneObject.transform.parent;
+                if (binding.parentBone != null) return binding.parentBone;
+                if (binding.initialSceneObject != null) return binding.initialSceneObject.transform.parent;
             }
         }
         return null;
@@ -234,11 +295,10 @@ public class Swapper : MonoBehaviour
 
     public void SwapPatternTexture(MaterialZone zone, Texture newTexture)
     {
+        currentZoneTextures[zone] = newTexture;
+
         if (!TryGetZoneBinding(zone, out MaterialZoneBinding binding))
-        {
-            Debug.LogWarning($"[Swapper] Aucune configuration trouvée pour la zone : {zone}");
             return;
-        }
 
         List<Material> targetMaterials = GetTargetMaterials(binding);
         if (targetMaterials.Count == 0) return;
@@ -250,56 +310,42 @@ public class Swapper : MonoBehaviour
         int intPropID = Shader.PropertyToID(intPropName);
 
         if (activePatternSequences.TryGetValue(zone, out Sequence existingSeq) && existingSeq != null && existingSeq.IsActive())
-        {
             existingSeq.Kill();
-        }
 
-        float currentIntensity = 1f;
-        if (targetMaterials[0].HasProperty(intPropID))
-        {
-            currentIntensity = targetMaterials[0].GetFloat(intPropID);
-        }
-
+        float currentIntensity = targetMaterials[0].HasProperty(intPropID) ? targetMaterials[0].GetFloat(intPropID) : 1f;
         float halfDuration = patternTransitionDuration * 0.5f;
 
         Sequence seq = DOTween.Sequence().SetUpdate(true);
 
         seq.Append(
-            DOVirtual.Float(currentIntensity, 0f, halfDuration, val =>
-            {
-                SetMaterialsFloat(targetMaterials, intPropID, val);
-            }).SetEase(patternEase)
+            DOVirtual.Float(currentIntensity, 0f, halfDuration, val => SetMaterialsFloat(targetMaterials, intPropID, val))
+                     .SetEase(patternEase)
         );
 
-        seq.AppendCallback(() =>
-        {
-            SetMaterialsTexture(targetMaterials, texPropID, texPropName, newTexture);
-        });
+        seq.AppendCallback(() => SetMaterialsTexture(targetMaterials, texPropID, texPropName, newTexture));
 
         float targetEndIntensity = newTexture != null ? 1f : 0f;
         if (targetEndIntensity > 0f)
         {
             seq.Append(
-                DOVirtual.Float(0f, targetEndIntensity, halfDuration, val =>
-                {
-                    SetMaterialsFloat(targetMaterials, intPropID, val);
-                }).SetEase(patternEase)
+                DOVirtual.Float(0f, targetEndIntensity, halfDuration, val => SetMaterialsFloat(targetMaterials, intPropID, val))
+                         .SetEase(patternEase)
             );
         }
 
         activePatternSequences[zone] = seq;
     }
 
-    public void SwapAllLegsPattern(Texture newTexture)
+    public void SwapZonesPattern(IEnumerable<MaterialZone> zones, Texture newTexture)
     {
-        SwapPatternTexture(MaterialZone.FrontLeftLeg, newTexture);
-        SwapPatternTexture(MaterialZone.FrontRightLeg, newTexture);
-        SwapPatternTexture(MaterialZone.BackLeftLeg, newTexture);
-        SwapPatternTexture(MaterialZone.BackRightLeg, newTexture);
+        foreach (var zone in zones)
+            SwapPatternTexture(zone, newTexture);
     }
 
     public void SwapZoneColor(MaterialZone zone, Color newColor, string colorPropertyName = "_BaseColor")
     {
+        currentZoneColors[(zone, colorPropertyName)] = newColor;
+
         if (!TryGetZoneBinding(zone, out MaterialZoneBinding binding)) return;
 
         List<Material> targetMaterials = GetTargetMaterials(binding);
@@ -312,7 +358,17 @@ public class Swapper : MonoBehaviour
         }
     }
 
-    #region Helpers
+    public void SwapZonesColor(IEnumerable<MaterialZone> zones, Color newColor, string colorPropertyName = "_BaseColor")
+    {
+        foreach (var zone in zones)
+            SwapZoneColor(zone, newColor, colorPropertyName);
+    }
+
+    public Texture GetZoneTexture(MaterialZone zone) 
+        => currentZoneTextures.TryGetValue(zone, out var tex) ? tex : null;
+
+    public Color GetZoneColor(MaterialZone zone, string colorPropertyName = "_BaseColor") 
+        => currentZoneColors.TryGetValue((zone, colorPropertyName), out var col) ? col : Color.white;
 
     private List<Material> GetTargetMaterials(MaterialZoneBinding binding)
     {
@@ -322,9 +378,7 @@ public class Swapper : MonoBehaviour
             if (rend == null) continue;
             Material[] mats = rend.materials;
             if (binding.materialIndex >= 0 && binding.materialIndex < mats.Length)
-            {
                 results.Add(mats[binding.materialIndex]);
-            }
         }
         return results;
     }
@@ -344,8 +398,6 @@ public class Swapper : MonoBehaviour
         {
             if (mat.HasProperty(propertyID))
                 mat.SetTexture(propertyID, tex);
-            else
-                Debug.LogWarning($"[Swapper] Le matériau '{mat.name}' ne possède pas la propriété '{propName}'.");
         }
     }
 
@@ -366,12 +418,8 @@ public class Swapper : MonoBehaviour
     private void OnDestroy()
     {
         foreach (var seq in activePatternSequences.Values)
-        {
             seq?.Kill();
-        }
     }
-
-    #endregion
 
     #endregion
 }

@@ -1,0 +1,215 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a8d94c5408cef44e87c6530c783f808, type: 3}
+  m_Name: Datas_Features
+  m_EditorClassIdentifier: Assembly-CSharp::CustomizationCategoryData
+  categoryName: Features
+  categoryIcon: {fileID: 0}
+  defaultCategoryCamera: 0
+  elements:
+  - elementName: Mane
+    contentType: 2
+    cameraFocus: 1
+    targetMeshSlot: 4
+    shapesSubtitle: Shape
+    defaultShapeIndex: 0
+    shapes:
+    - shapeName: None
+      previewIcon: {fileID: -6310264775393301120, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
+      meshPrefab: {fileID: 0}
+    - shapeName: Braid
+      previewIcon: {fileID: 7346286456824143923, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
+      meshPrefab: {fileID: 8167351709613769729, guid: d05fcba898dbd28498224d86ae6f5d72, type: 3}
+    - shapeName: Long
+      previewIcon: {fileID: 8992201526706326958, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
+      meshPrefab: {fileID: 2526414194452504928, guid: e4cd2140eaa319942946c6b00cf68b02, type: 3}
+    - shapeName: Wavy
+      previewIcon: {fileID: -1056518617131817030, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
+      meshPrefab: {fileID: 3333379192363718700, guid: faa261b272780bf47b69fb907886f7d3, type: 3}
+    - shapeName: Broom
+      previewIcon: {fileID: -4504340845707973313, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
+      meshPrefab: {fileID: 1623570190013470036, guid: bc830709022fd814c82c4394f7c0bf25, type: 3}
+    - shapeName: Classic
+      previewIcon: {fileID: -1652475177483671101, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
+      meshPrefab: {fileID: 7348173466910754887, guid: a70e6a2d7e75ca14189f15164159f60d, type: 3}
+    hasSecondaryShapes: 1
+    secondaryMeshSlot: 5
+    secondaryShapesSubtitle: Forelock
+    defaultSecondaryShapeIndex: 0
+    secondaryShapes:
+    - shapeName: None
+      previewIcon: {fileID: 6607082334797926204, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
+      meshPrefab: {fileID: 0}
+    - shapeName: Classic
+      previewIcon: {fileID: -4282425358676971010, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
+      meshPrefab: {fileID: 0}
+    - shapeName: Braid
+      previewIcon: {fileID: 6549569340082482699, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
+      meshPrefab: {fileID: 0}
+    - shapeName: Long
+      previewIcon: {fileID: 8094693275281711796, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
+      meshPrefab: {fileID: 0}
+    - shapeName: Wavy
+      previewIcon: {fileID: 7844050291018481459, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
+      meshPrefab: {fileID: 0}
+    - shapeName: Broom
+      previewIcon: {fileID: 7039885353533386182, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
+      meshPrefab: {fileID: 0}
+    targetMaterialZone: 7
+    isLegsPatternElement: 0
+    patternsSubtitle: Patterns
+    defaultPatternIndex: -1
+    patterns: []
+    colorsSubtitle: Colors
+    colorSettings:
+      hasColors: 1
+      colorButtonPrefab: {fileID: 0}
+      colorPickerPrefab: {fileID: 0}
+      colorChannels:
+      - colorName: Color
+        shaderPropertyName: _BaseColor
+        defaultColor: {r: 0.22, g: 0.14, b: 0.1, a: 1}
+      - colorName: Highlights Color
+        shaderPropertyName: _PatternColor
+        defaultColor: {r: 0.92, g: 0.78, b: 0.45, a: 1}
+  - elementName: Tail
+    contentType: 2
+    cameraFocus: 3
+    targetMeshSlot: 6
+    shapesSubtitle: Shape
+    defaultShapeIndex: 0
+    shapes:
+    - shapeName: None
+      previewIcon: {fileID: -7235979748710687288, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
+      meshPrefab: {fileID: 0}
+    - shapeName: Wavy
+      previewIcon: {fileID: 2099833848526938379, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
+      meshPrefab: {fileID: 7027136315200948550, guid: 2eebe20c6a85fbf42bf99c3905b9ff73, type: 3}
+    - shapeName: Braid
+      previewIcon: {fileID: -8848381498564387377, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
+      meshPrefab: {fileID: 8703004947099841500, guid: 7e8ce6acc4738534ab21f3cbe7a2ef61, type: 3}
+    - shapeName: Mermaid
+      previewIcon: {fileID: -490944786137750867, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
+      meshPrefab: {fileID: 8672552059221762405, guid: b0373c8fbf7e7f64f9e789e20ee4ba5d, type: 3}
+    - shapeName: Classic
+      previewIcon: {fileID: -8543613761460130509, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
+      meshPrefab: {fileID: 7994823187117454196, guid: f3c7afedef9d2c34cb4c8f31dcbfa6f1, type: 3}
+    - shapeName: Unicorn
+      previewIcon: {fileID: 8349313925881549238, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
+      meshPrefab: {fileID: 5395187223341281946, guid: a34812e3e30da8148a1b5386968e79d4, type: 3}
+    hasSecondaryShapes: 0
+    secondaryMeshSlot: 5
+    secondaryShapesSubtitle: Forelock
+    defaultSecondaryShapeIndex: -1
+    secondaryShapes: []
+    targetMaterialZone: 8
+    isLegsPatternElement: 0
+    patternsSubtitle: Patterns
+    defaultPatternIndex: -1
+    patterns: []
+    colorsSubtitle: Colors
+    colorSettings:
+      hasColors: 1
+      colorButtonPrefab: {fileID: 0}
+      colorPickerPrefab: {fileID: 0}
+      colorChannels:
+      - colorName: Color
+        shaderPropertyName: _BaseColor
+        defaultColor: {r: 0.22, g: 0.14, b: 0.1, a: 1}
+      - colorName: Highlights Color
+        shaderPropertyName: _PatternColor
+        defaultColor: {r: 0.92, g: 0.78, b: 0.45, a: 1}
+  - elementName: Horn
+    contentType: 2
+    cameraFocus: 1
+    targetMeshSlot: 7
+    shapesSubtitle: Shape
+    defaultShapeIndex: 0
+    shapes:
+    - shapeName: None
+      previewIcon: {fileID: -3460800545070651169, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
+      meshPrefab: {fileID: 0}
+    - shapeName: Straight
+      previewIcon: {fileID: -7711398523137129504, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
+      meshPrefab: {fileID: 7999640256794378591, guid: f834a503b3c99a54bb7fb2dcd7b6da6b, type: 3}
+    - shapeName: Curved
+      previewIcon: {fileID: 2107159372141095115, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
+      meshPrefab: {fileID: 2536559539963636410, guid: 44dd6a81fe8d2ba4588efe0cb7c8ad90, type: 3}
+    - shapeName: Rhino
+      previewIcon: {fileID: 7842106240852296181, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
+      meshPrefab: {fileID: 591562272287364189, guid: bb05ec9711df27c4fb20a14b565235da, type: 3}
+    - shapeName: Goat
+      previewIcon: {fileID: 5882982922341788624, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
+      meshPrefab: {fileID: 7018018426036731313, guid: f80ce8d4b366dad48a5349d588388008, type: 3}
+    hasSecondaryShapes: 0
+    secondaryMeshSlot: 5
+    secondaryShapesSubtitle: Forelock
+    defaultSecondaryShapeIndex: -1
+    secondaryShapes: []
+    targetMaterialZone: 9
+    isLegsPatternElement: 0
+    patternsSubtitle: Patterns
+    defaultPatternIndex: -1
+    patterns: []
+    colorsSubtitle: Colors
+    colorSettings:
+      hasColors: 1
+      colorButtonPrefab: {fileID: 0}
+      colorPickerPrefab: {fileID: 0}
+      colorChannels:
+      - colorName: Color
+        shaderPropertyName: _BaseColor
+        defaultColor: {r: 0.95, g: 0.9, b: 0.78, a: 1}
+      - colorName: Highlight Color
+        shaderPropertyName: _PatternColor
+        defaultColor: {r: 1, g: 0.97, b: 0.88, a: 1}
+  - elementName: Wings
+    contentType: 2
+    cameraFocus: 0
+    targetMeshSlot: 8
+    shapesSubtitle: Shape
+    defaultShapeIndex: 0
+    shapes:
+    - shapeName: None
+      previewIcon: {fileID: 7714022236768202309, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
+      meshPrefab: {fileID: 0}
+    - shapeName: Feathered
+      previewIcon: {fileID: 94257746875860944, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
+      meshPrefab: {fileID: 6328529845673026523, guid: 619eb1acef366f244944f202687db61a, type: 3}
+    - shapeName: Dragon
+      previewIcon: {fileID: 3438546090263947381, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
+      meshPrefab: {fileID: 5051135035329593031, guid: c1cbf5eb4aa11ea48a235b760844b885, type: 3}
+    - shapeName: Small
+      previewIcon: {fileID: 2736858625169816868, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
+      meshPrefab: {fileID: 3687198686593048892, guid: 5b8b81130bea7fb43984a5b5464dec8e, type: 3}
+    hasSecondaryShapes: 0
+    secondaryMeshSlot: 5
+    secondaryShapesSubtitle: Forelock
+    defaultSecondaryShapeIndex: -1
+    secondaryShapes: []
+    targetMaterialZone: 10
+    isLegsPatternElement: 0
+    patternsSubtitle: Patterns
+    defaultPatternIndex: -1
+    patterns: []
+    colorsSubtitle: Colors
+    colorSettings:
+      hasColors: 1
+      colorButtonPrefab: {fileID: 0}
+      colorPickerPrefab: {fileID: 0}
+      colorChannels:
+      - colorName: Color
+        shaderPropertyName: _BaseColor
+        defaultColor: {r: 0.96, g: 0.94, b: 0.9, a: 1}
+      - colorName: Highlights Color
+        shaderPropertyName: _PatternColor
+        defaultColor: {r: 0.85, g: 0.75, b: 0.65, a: 1}

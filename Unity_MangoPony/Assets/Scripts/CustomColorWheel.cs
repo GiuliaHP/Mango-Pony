@@ -39,9 +39,6 @@ public class CustomColorWheel : MonoBehaviour, IPointerDownHandler, IDragHandler
     private float currentSaturation = 1f;
     private float currentValue = 1f;
 
-    // Le bouton pastille actuellement en cours d'édition
-    private ColorSwatchButton activeSwatchButton;
-
     private enum DragMode { None, Wheel, Square }
     private DragMode currentDragMode = DragMode.None;
 
@@ -58,48 +55,32 @@ public class CustomColorWheel : MonoBehaviour, IPointerDownHandler, IDragHandler
         UpdateVisuals();
     }
 
-    /// <summary>
-    /// Trouve et sélectionne automatiquement le premier ColorSwatchButton actif dans la hiérarchie.
-    /// </summary>
+    private CustomizationButton activeSwatchButton;
+
     public void SelectFirstActiveSwatch()
     {
-        if (swatchListContainer != null)
+        Transform searchRoot = swatchListContainer != null ? swatchListContainer : transform.parent;
+        if (searchRoot != null)
         {
-            // GetComponentInChildren(false) renvoie uniquement le premier composant actif dans l'ordre de la hiérarchie
-            ColorSwatchButton firstActive = swatchListContainer.GetComponentInChildren<ColorSwatchButton>(false);
-            if (firstActive != null)
+            foreach (var btn in searchRoot.GetComponentsInChildren<CustomizationButton>(false))
             {
-                SelectSwatchButton(firstActive);
-                return;
+                if (btn.Type == CustomizationButton.OptionType.ColorSwatch)
+                {
+                    SelectSwatchButton(btn);
+                    return;
+                }
             }
         }
-
-        // Fallback : cherche dans toute la scène parmi les objets actifs uniquement
-        ColorSwatchButton[] activeSwatches = FindObjectsByType<ColorSwatchButton>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
-        if (activeSwatches.Length > 0)
-        {
-            // On prend celui qui apparaît en premier dans l'ordre de la hiérarchie Unity
-            System.Array.Sort(activeSwatches, (a, b) => a.transform.GetSiblingIndex().CompareTo(b.transform.GetSiblingIndex()));
-            SelectSwatchButton(activeSwatches[0]);
-        }
     }
-    
 
-    /// <summary>
-    /// Lie un bouton de couleur à la roue et synchronise les curseurs sur la couleur de ce bouton.
-    /// </summary>
-    public void SelectSwatchButton(ColorSwatchButton swatchButton)
+    public void SelectSwatchButton(CustomizationButton swatchButton)
     {
+        if (swatchButton == null || swatchButton.Type != CustomizationButton.OptionType.ColorSwatch)
+            return;
+
         activeSwatchButton = swatchButton;
-        if (activeSwatchButton == null) return;
-
-        // Convertit la couleur RGB stockée dans le bouton en HSV pour replacer les curseurs
         Color.RGBToHSV(activeSwatchButton.CurrentColor, out float h, out float s, out float v);
-
-        // Si la couleur est purement noire ou blanche, on conserve la teinte actuelle pour ne pas faire sauter l'anneau à 0
-        if (s > 0.001f)
-            currentHue = h;
-
+        if (s > 0.001f) currentHue = h;
         currentSaturation = s;
         currentValue = v;
 

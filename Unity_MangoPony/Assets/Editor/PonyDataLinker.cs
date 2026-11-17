@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.IO;
 using System.Text;
 using UnityEditor;
 using UnityEngine;
@@ -101,54 +100,24 @@ public static class PonyDataLinker
                     Swapper.SlotType slot = (Swapper.SlotType)slotProp.enumValueIndex;
                     string elementName = elementNameProp != null ? elementNameProp.stringValue : $"Element_{e}";
 
-                    // A. Shapes (Meshes 3D + Preview Icons)
+                    // A1. Shapes principales (Meshes 3D + Preview Icons)
                     SerializedProperty shapesProp = elementProp.FindPropertyRelative("shapes");
-                    if (shapesProp != null && shapesProp.isArray)
+                    LinkShapesArray(shapesProp, slot, prefabs, sprites, categoryData.name, elementName, logResults, ref isDirty, ref linkedCount);
+
+                    // A2. Shapes secondaires (ex: Forelock dans Mane)
+                    SerializedProperty hasSecondaryProp = elementProp.FindPropertyRelative("hasSecondaryShapes");
+                    if (hasSecondaryProp != null && hasSecondaryProp.boolValue)
                     {
-                        for (int s = 0; s < shapesProp.arraySize; s++)
-                        {
-                            SerializedProperty shapeProp = shapesProp.GetArrayElementAtIndex(s);
-                            SerializedProperty shapeNameProp = shapeProp.FindPropertyRelative("shapeName");
-                            SerializedProperty meshPrefabProp = shapeProp.FindPropertyRelative("meshPrefab");
-                            SerializedProperty previewIconProp = shapeProp.FindPropertyRelative("previewIcon");
+                        SerializedProperty secondarySlotProp = elementProp.FindPropertyRelative("secondaryMeshSlot");
+                        SerializedProperty secondaryShapesProp = elementProp.FindPropertyRelative("secondaryShapes");
+                        SerializedProperty secondarySubProp = elementProp.FindPropertyRelative("secondaryShapesSubtitle");
 
-                            string shapeName = shapeNameProp.stringValue;
-                            string normShape = NormalizeName(shapeName);
+                        Swapper.SlotType secondarySlot = (Swapper.SlotType)secondarySlotProp.enumValueIndex;
+                        string secondaryLabel = secondarySubProp != null && !string.IsNullOrEmpty(secondarySubProp.stringValue)
+                            ? $"{elementName} ({secondarySubProp.stringValue})"
+                            : $"{elementName} (Secondary)";
 
-                            // Cas "None" / "Aucune"
-                            bool isNone = normShape == "none" || normShape == "aucune" || normShape == "aucun" || string.IsNullOrEmpty(normShape);
-                            if (isNone)
-                            {
-                                if (meshPrefabProp.objectReferenceValue != null)
-                                {
-                                    meshPrefabProp.objectReferenceValue = null;
-                                    isDirty = true;
-                                }
-                            }
-                            else
-                            {
-                                GameObject matchedPrefab = FindMatchingPrefab(prefabs, slot, shapeName);
-                                if (matchedPrefab != null && meshPrefabProp.objectReferenceValue != matchedPrefab)
-                                {
-                                    meshPrefabProp.objectReferenceValue = matchedPrefab;
-                                    isDirty = true;
-                                    linkedCount++;
-                                    if (logResults)
-                                        Debug.Log($"<color=#5cd65c>[PonyDataLinker] Mesh lié :</color> {categoryData.name} > {elementName} > <b>{shapeName}</b> => <b>{matchedPrefab.name}</b>");
-                                }
-                            }
-
-                            // Recherche de l'icône de Shape
-                            Sprite matchedIcon = FindMatchingSprite(sprites, slot.ToString(), shapeName);
-                            if (matchedIcon != null && previewIconProp.objectReferenceValue != matchedIcon)
-                            {
-                                previewIconProp.objectReferenceValue = matchedIcon;
-                                isDirty = true;
-                                linkedCount++;
-                                if (logResults)
-                                    Debug.Log($"<color=#33ccff>[PonyDataLinker] Icône liée :</color> {categoryData.name} > {elementName} > <b>{shapeName}</b> => <b>{matchedIcon.name}</b>");
-                            }
-                        }
+                        LinkShapesArray(secondaryShapesProp, secondarySlot, prefabs, sprites, categoryData.name, secondaryLabel, logResults, ref isDirty, ref linkedCount);
                     }
 
                     // B. Patterns (Textures Shaders + Preview Icons)
@@ -165,7 +134,6 @@ public static class PonyDataLinker
                             string patternName = patternNameProp.stringValue;
                             string normPattern = NormalizeName(patternName);
 
-                            // Texture de masque
                             bool isNone = normPattern == "none" || normPattern == "aucun" || normPattern == "aucune" || normPattern == "solid";
                             if (isNone)
                             {
@@ -188,7 +156,6 @@ public static class PonyDataLinker
                                 }
                             }
 
-                            // Icône de pattern
                             Sprite matchedIcon = FindMatchingSprite(sprites, elementName, patternName);
                             if (matchedIcon != null && patternIconProp.objectReferenceValue != matchedIcon)
                             {
@@ -219,19 +186,79 @@ public static class PonyDataLinker
         return linkedCount;
     }
 
+    private static void LinkShapesArray(
+        SerializedProperty shapesProp,
+        Swapper.SlotType slot,
+        List<GameObject> prefabs,
+        Dictionary<string, Sprite> sprites,
+        string categoryName,
+        string elementLabel,
+        bool logResults,
+        ref bool isDirty,
+        ref int linkedCount)
+    {
+        if (shapesProp == null || !shapesProp.isArray) return;
+
+        for (int s = 0; s < shapesProp.arraySize; s++)
+        {
+            SerializedProperty shapeProp = shapesProp.GetArrayElementAtIndex(s);
+            SerializedProperty shapeNameProp = shapeProp.FindPropertyRelative("shapeName");
+            SerializedProperty meshPrefabProp = shapeProp.FindPropertyRelative("meshPrefab");
+            SerializedProperty previewIconProp = shapeProp.FindPropertyRelative("previewIcon");
+
+            string shapeName = shapeNameProp.stringValue;
+            string normShape = NormalizeName(shapeName);
+
+            bool isNone = normShape == "none" || normShape == "aucune" || normShape == "aucun" || string.IsNullOrEmpty(normShape);
+            if (isNone)
+            {
+                if (meshPrefabProp.objectReferenceValue != null)
+                {
+                    meshPrefabProp.objectReferenceValue = null;
+                    isDirty = true;
+                }
+            }
+            else
+            {
+                GameObject matchedPrefab = FindMatchingPrefab(prefabs, slot, shapeName);
+                if (matchedPrefab != null && meshPrefabProp.objectReferenceValue != matchedPrefab)
+                {
+                    meshPrefabProp.objectReferenceValue = matchedPrefab;
+                    isDirty = true;
+                    linkedCount++;
+                    if (logResults)
+                        Debug.Log($"<color=#5cd65c>[PonyDataLinker] Mesh lié :</color> {categoryName} > {elementLabel} > <b>{shapeName}</b> => <b>{matchedPrefab.name}</b>");
+                }
+            }
+
+            Sprite matchedIcon = FindMatchingSprite(sprites, slot.ToString(), shapeName);
+            if (matchedIcon != null && previewIconProp.objectReferenceValue != matchedIcon)
+            {
+                previewIconProp.objectReferenceValue = matchedIcon;
+                isDirty = true;
+                linkedCount++;
+                if (logResults)
+                    Debug.Log($"<color=#33ccff>[PonyDataLinker] Icône liée :</color> {categoryName} > {elementLabel} > <b>{shapeName}</b> => <b>{matchedIcon.name}</b>");
+            }
+        }
+    }
+
     private static GameObject FindMatchingPrefab(List<GameObject> prefabs, Swapper.SlotType slot, string shapeName)
     {
         string normShape = NormalizeName(shapeName);
         string slotStr = slot.ToString().ToLowerInvariant();
         string slotPrefix = slotStr == "wings" ? "wing" : slotStr;
 
-        // Dictionnaire de synonymes EN <-> FR
         var synonyms = GetSynonyms(normShape);
 
         foreach (var prefab in prefabs)
         {
             string normPrefab = NormalizeName(prefab.name);
             bool matchesSlot = normPrefab.Contains(slotPrefix) || normPrefab.Contains(slotStr);
+
+            if (!matchesSlot && slot == Swapper.SlotType.Forelock)
+                matchesSlot = normPrefab.Contains("forelock") || normPrefab.Contains("toupet");
+
             if (!matchesSlot) continue;
 
             foreach (var syn in synonyms)
@@ -250,12 +277,20 @@ public static class PonyDataLinker
         string normCat = NormalizeName(categoryOrSlot);
         var synonyms = GetSynonyms(normItem);
 
-        // Détermine les préfixes autorisés selon le slot ou la catégorie
         List<string> allowedPrefixes = new List<string>();
         if (normCat.Contains("headpattern") || normCat.Contains("facemark") || (normCat.Contains("marque") && normCat.Contains("front")))
             allowedPrefixes.Add("headpattern");
+        else if (normCat.Contains("leg") || normCat.Contains("balzane") || normCat.Contains("membre"))
+        {
+            allowedPrefixes.Add("legspaterns");
+            allowedPrefixes.Add("legspattern");
+            allowedPrefixes.Add("legs");
+            allowedPrefixes.Add("hooves");
+        }
         else if (normCat.Contains("head") || normCat.Contains("tete"))
             allowedPrefixes.Add("head");
+        else if (normCat.Contains("bodypattern") || normCat.Contains("robe") || normCat.Contains("coat") || normCat.Contains("pattern"))
+            allowedPrefixes.Add("bodypattern");
         else if (normCat.Contains("bodypattern") || normCat.Contains("robe") || normCat.Contains("coat") || normCat.Contains("pattern"))
             allowedPrefixes.Add("bodypattern");
         else if (normCat.Contains("body") || normCat.Contains("corps"))
@@ -266,20 +301,18 @@ public static class PonyDataLinker
             allowedPrefixes.Add("horn");
         else if (normCat.Contains("wing") || normCat.Contains("aile"))
             allowedPrefixes.Add("wings");
-        else if (normCat.Contains("mane") || normCat.Contains("criniere") || normCat.Contains("toupet") || normCat.Contains("forelock"))
+        else if (normCat.Contains("forelock") || normCat.Contains("toupet"))
+        {
+            allowedPrefixes.Add("forelock");
+            allowedPrefixes.Add("mane");
+        }
+        else if (normCat.Contains("mane") || normCat.Contains("criniere"))
         {
             allowedPrefixes.Add("mane");
             allowedPrefixes.Add("forelock");
         }
         else if (normCat.Contains("tail") || normCat.Contains("queue"))
             allowedPrefixes.Add("tail");
-        else if (normCat.Contains("leg") || normCat.Contains("hooves") || normCat.Contains("sabot") || normCat.Contains("balzane") || normCat.Contains("membre"))
-        {
-            allowedPrefixes.Add("legspaterns");
-            allowedPrefixes.Add("legspattern");
-            allowedPrefixes.Add("legs");
-            allowedPrefixes.Add("hooves");
-        }
         else if (normCat.Contains("colorrepartition") || normCat.Contains("repartition") || normCat.Contains("nuance"))
             allowedPrefixes.Add("colorrepartition");
         else
@@ -287,7 +320,7 @@ public static class PonyDataLinker
             return null;
         }
 
-        // 1. Clés directes avec les préfixes autorisés (ex: "headbase", "headslim", "headdraft")
+        // 1. Clés directes avec les préfixes autorisés
         foreach (var syn in synonyms)
         {
             string exactKey = normCat + syn;
@@ -314,7 +347,7 @@ public static class PonyDataLinker
 
             if (!hasAllowedPrefix) continue;
 
-            // Évite que "head" matche "headpattern..."
+            // Évite que "head" matche "headpattern..." et "body" matche "bodypattern..."
             if (allowedPrefixes.Contains("head") && kvp.Key.StartsWith("headpattern", StringComparison.OrdinalIgnoreCase))
                 continue;
             if (allowedPrefixes.Contains("body") && kvp.Key.StartsWith("bodypattern", StringComparison.OrdinalIgnoreCase))
@@ -367,7 +400,7 @@ public static class PonyDataLinker
             case "small": list.AddRange(new[] { "mini", "small" }); break;
             case "dragon": list.Add("dragon"); break;
 
-            // Mane & Tail
+            // Mane, Forelock & Tail
             case "brush": list.AddRange(new[] { "broom", "brosse" }); break;
             case "braided": list.AddRange(new[] { "braid", "tresse", "tresses" }); break;
             case "wild": list.AddRange(new[] { "long", "sauvage" }); break;

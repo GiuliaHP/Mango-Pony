@@ -34,6 +34,8 @@ public class CustomizationUIGenerator : MonoBehaviour
     public GameObject categoryPanelPrefab;
     [Tooltip("Chemin vers le Content dans le Category Panel Prefab (ex: 'Viewport/Content', laisser vide si racine)")]
     public string panelContentPath = "Viewport/Content";
+    [Tooltip("Prefab du sélecteur de pattes (LegsPatternSelector : 4 Legs / Front-Back / Individual)")]
+    public GameObject legsSelectorPrefab;
 
     [Space(5)]
     [Tooltip("Prefab du Title (TextMeshProUGUI avec le nom de l'élément)")]
@@ -94,8 +96,7 @@ public class CustomizationUIGenerator : MonoBehaviour
             currentActiveIndex = 0;
 
             if (cameraController != null && categories.Count > 0 && categories[0] != null)
-                cameraController.FocusOnZone(categories[0].cameraFocus, immediate: true);
-
+                cameraController.FocusOnZone(categories[0].defaultCategoryCamera, immediate: true);
             if (categoryContainer != null)
                 SetContainerWidth(openWidth);
 
@@ -164,7 +165,7 @@ public class CustomizationUIGenerator : MonoBehaviour
 
         if (cameraController != null && index < categories.Count && categories[index] != null)
         {
-            cameraController.FocusOnZone(categories[index].cameraFocus, immediate: false);
+            cameraController.FocusOnZone(categories[index].defaultCategoryCamera, immediate: false);
         }
     }
 

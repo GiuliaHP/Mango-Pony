@@ -160,12 +160,12 @@ GameObject:
   m_Component:
   - component: {fileID: 366215909391966673}
   - component: {fileID: 2200291741143677666}
+  - component: {fileID: 6106262401476548014}
   - component: {fileID: 2370364570274065018}
-  - component: {fileID: 4791217381852080408}
   - component: {fileID: 8996848225305061032}
   - component: {fileID: 8159281839226514549}
   m_Layer: 5
-  m_Name: Button_Preview
+  m_Name: Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -200,6 +200,28 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8035233834191105771}
   m_CullTransparentMesh: 1
+--- !u!114 &6106262401476548014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8035233834191105771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91668e9ab16f2b7429917f441f4891c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomizationButton
+  optionType: 0
+  focusZone: 0
+  slotType: 0
+  meshPrefab: {fileID: 0}
+  targetZone: 0
+  isLegsPattern: 0
+  patternTexture: {fileID: 0}
+  swatchPreviewImage: {fileID: 6369179866091576933}
+  shaderColorProperty: _BaseColor
+  defaultColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &2370364570274065018
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,18 +236,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::JuicyButton
   profile: {fileID: 11400000, guid: 77beba7af3c75d14f913965825c546b0, type: 2}
   customColorTarget: {fileID: 7517138412323803229}
---- !u!114 &4791217381852080408
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8035233834191105771}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab0bd15f7004b6344a2f6e99d12e6d9a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MeshPreviewButton
 --- !u!114 &8996848225305061032
 MonoBehaviour:
   m_ObjectHideFlags: 0
