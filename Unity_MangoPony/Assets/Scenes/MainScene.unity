@@ -2231,7 +2231,7 @@ MonoBehaviour:
   categoryScrollRect: {fileID: 1048270303}
   tabButtonPrefab: {fileID: 8783498810688041453, guid: 95b8a40589f6f8742bda6bfed4afe607, type: 3}
   categoryPanelPrefab: {fileID: 3119297296029565220, guid: d21e659415c30964bbb20b9564ba1426, type: 3}
-  panelContentPath: Viewport/Content
+  panelContentPath:
   legsSelectorPrefab: {fileID: 230709541032827109, guid: 2ef64b7e59c6e0a42a8fb1f62860a016, type: 3}
   elementTitlePrefab: {fileID: 5832558797835520907, guid: 0a595d0bc9e199b4e870fd94dae3d484, type: 3}
   subtitlePrefab: {fileID: 7699114532845897752, guid: 269b0628b14c7ab40a1739d2a0d0dfcd, type: 3}
@@ -18679,31 +18679,52 @@ MonoBehaviour:
   inactivePriority: 10
   activePriority: 20
   resetViewButton: {fileID: 1659809392}
-  presets:
-  - presetName: Body
-    focusZones: 
-    virtualCamera: {fileID: 1898978858}
-    controlMode: 0
-    focusPoint: {fileID: 543450651736719037}
-    minPitch: -180
-    maxPitch: 180
-    minYaw: -180
-    maxYaw: 180
-    defaultFOV: 60
-    minFOV: 40
-    maxFOV: 80
-  - presetName: Features
-    focusZones: 010000000200000003000000
-    virtualCamera: {fileID: 2072821075}
-    controlMode: 1
-    focusPoint: {fileID: 543450651736719037}
-    minPitch: -180
-    maxPitch: 180
-    minYaw: -180
-    maxYaw: 180
-    defaultFOV: 60
-    minFOV: 40
-    maxFOV: 80
+  fullbody:
+    id: 
+    camera: {fileID: 1898978858}
+    pivot: {fileID: 543450651736719037}
+    minPitch: -20
+    maxPitch: 45
+    minYaw: 0
+    maxYaw: 0
+    defaultFov: 60
+    minFov: 40
+    maxFov: 80
+    ponyYaw: 0
+  details:
+  - id: Head
+    camera: {fileID: 2072821075}
+    pivot: {fileID: 543450651736719037}
+    minPitch: -45
+    maxPitch: 45
+    minYaw: -60
+    maxYaw: 60
+    defaultFov: 60
+    minFov: 40
+    maxFov: 80
+    ponyYaw: 0
+  - id: Legs
+    camera: {fileID: 2072821075}
+    pivot: {fileID: 543450651736719037}
+    minPitch: -45
+    maxPitch: 45
+    minYaw: -60
+    maxYaw: 60
+    defaultFov: 60
+    minFov: 40
+    maxFov: 80
+    ponyYaw: 0
+  - id: Tail
+    camera: {fileID: 2072821075}
+    pivot: {fileID: 543450651736719037}
+    minPitch: -45
+    maxPitch: 45
+    minYaw: -60
+    maxYaw: 60
+    defaultFov: 60
+    minFov: 40
+    maxFov: 80
+    ponyYaw: 0
 --- !u!4 &2080851311
 Transform:
   m_ObjectHideFlags: 0

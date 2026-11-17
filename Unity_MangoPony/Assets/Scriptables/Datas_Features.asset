@@ -14,14 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CustomizationCategoryData
   categoryName: Features
   categoryIcon: {fileID: 0}
-  defaultCategoryCamera: 0
+  defaultCamera: 
   elements:
   - elementName: Mane
     contentType: 2
-    cameraFocus: 1
+    camera: Head
     targetMeshSlot: 4
     shapesSubtitle: Shape
-    defaultShapeIndex: 0
+    defaultShapeIndex: 5
     shapes:
     - shapeName: None
       previewIcon: {fileID: -6310264775393301120, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
@@ -44,7 +44,7 @@ MonoBehaviour:
     hasSecondaryShapes: 1
     secondaryMeshSlot: 5
     secondaryShapesSubtitle: Forelock
-    defaultSecondaryShapeIndex: 0
+    defaultSecondaryShapeIndex: 1
     secondaryShapes:
     - shapeName: None
       previewIcon: {fileID: 6607082334797926204, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
@@ -83,10 +83,10 @@ MonoBehaviour:
         defaultColor: {r: 0.92, g: 0.78, b: 0.45, a: 1}
   - elementName: Tail
     contentType: 2
-    cameraFocus: 3
+    camera: Tail
     targetMeshSlot: 6
     shapesSubtitle: Shape
-    defaultShapeIndex: 0
+    defaultShapeIndex: 4
     shapes:
     - shapeName: None
       previewIcon: {fileID: -7235979748710687288, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
@@ -130,7 +130,7 @@ MonoBehaviour:
         defaultColor: {r: 0.92, g: 0.78, b: 0.45, a: 1}
   - elementName: Horn
     contentType: 2
-    cameraFocus: 1
+    camera: Head
     targetMeshSlot: 7
     shapesSubtitle: Shape
     defaultShapeIndex: 0
@@ -174,7 +174,7 @@ MonoBehaviour:
         defaultColor: {r: 1, g: 0.97, b: 0.88, a: 1}
   - elementName: Wings
     contentType: 2
-    cameraFocus: 0
+    camera: 
     targetMeshSlot: 8
     shapesSubtitle: Shape
     defaultShapeIndex: 0

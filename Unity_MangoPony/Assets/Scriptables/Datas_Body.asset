@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CustomizationCategoryData
   categoryName: Body
   categoryIcon: {fileID: 0}
-  defaultCategoryCamera: 0
+  defaultCamera: 
   elements:
   - elementName: Body Shape
     contentType: 0
-    cameraFocus: 0
+    camera: 
     targetMeshSlot: 0
     shapesSubtitle: Shapes
     defaultShapeIndex: 0
@@ -50,7 +50,7 @@ MonoBehaviour:
       colorChannels: []
   - elementName: Head Shape
     contentType: 0
-    cameraFocus: 1
+    camera: Head
     targetMeshSlot: 1
     shapesSubtitle: Shapes
     defaultShapeIndex: 0
@@ -82,7 +82,7 @@ MonoBehaviour:
       colorChannels: []
   - elementName: Color Repartition
     contentType: 1
-    cameraFocus: 0
+    camera: 
     targetMeshSlot: 0
     shapesSubtitle: Shapes
     defaultShapeIndex: -1
@@ -123,7 +123,7 @@ MonoBehaviour:
         defaultColor: {r: 0.88, g: 0.78, b: 0.65, a: 1}
   - elementName: Body Pattern
     contentType: 1
-    cameraFocus: 0
+    camera: 
     targetMeshSlot: 0
     shapesSubtitle: Shapes
     defaultShapeIndex: -1
@@ -164,7 +164,7 @@ MonoBehaviour:
         defaultColor: {r: 0.96, g: 0.94, b: 0.9, a: 1}
   - elementName: Head Pattern
     contentType: 1
-    cameraFocus: 1
+    camera: Head
     targetMeshSlot: 1
     shapesSubtitle: Shapes
     defaultShapeIndex: -1
@@ -208,7 +208,7 @@ MonoBehaviour:
         defaultColor: {r: 0.98, g: 0.97, b: 0.95, a: 1}
   - elementName: Legs Pattern
     contentType: 1
-    cameraFocus: 2
+    camera: Legs
     targetMeshSlot: 2
     shapesSubtitle: Shapes
     defaultShapeIndex: -1
@@ -249,20 +249,20 @@ MonoBehaviour:
         defaultColor: {r: 0.98, g: 0.97, b: 0.95, a: 1}
   - elementName: Hooves
     contentType: 0
-    cameraFocus: 2
-    targetMeshSlot: 2
+    camera: Legs
+    targetMeshSlot: 3
     shapesSubtitle: Shapes
     defaultShapeIndex: 0
     shapes:
     - shapeName: Base
       previewIcon: {fileID: 746843545963474028, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
-      meshPrefab: {fileID: 1366074872888762623, guid: e844a31857b9af946ac8965ce27f80b0, type: 3}
+      meshPrefab: {fileID: 8267527463745999872, guid: 4d2641aa8e2a03746ab2fed7f8012815, type: 3}
     - shapeName: Slim
       previewIcon: {fileID: -6783563537083282260, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
-      meshPrefab: {fileID: 3242820722354682607, guid: cf0d60b619571184fb7f7cc66ba809d5, type: 3}
+      meshPrefab: {fileID: 3614041313216648947, guid: 179b820fef48396428be3106d1a3a08d, type: 3}
     - shapeName: Draft
       previewIcon: {fileID: 8425432924880420005, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
-      meshPrefab: {fileID: 2724616053684178005, guid: 278756034beaead4783b3a1992c2e908, type: 3}
+      meshPrefab: {fileID: 3169694591462850110, guid: 61a075d0d8e47954abc52c486536cbf5, type: 3}
     hasSecondaryShapes: 0
     secondaryMeshSlot: 5
     secondaryShapesSubtitle: Forelock

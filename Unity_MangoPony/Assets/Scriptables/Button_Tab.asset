@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc27c33659d38af49ab393c9e6cc6457, type: 3}
   m_Name: Button_Tab
   m_EditorClassIdentifier: Assembly-CSharp::JuicyButtonProfile
-  useScaleAnimation: 0
+  useScaleAnimation: 1
   hoverScale: {x: 1.06, y: 1.06, z: 1.06}
   hoverSizeOffset: {x: 0, y: 10}
   hoverDuration: 0.2
