@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CustomizationCategoryData
   categoryName: Accessories
   categoryIcon: {fileID: 0}
-  cameraFocus: 3
+  cameraFocus: 8
   elements:
   - elementName: Horns
     targetMeshSlot: 5

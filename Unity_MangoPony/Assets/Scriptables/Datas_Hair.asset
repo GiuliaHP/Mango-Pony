@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CustomizationCategoryData
   categoryName: Hair
   categoryIcon: {fileID: 0}
-  cameraFocus: 2
+  cameraFocus: 4
   elements:
   - elementName: Mane
     targetMeshSlot: 3

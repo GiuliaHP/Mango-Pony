@@ -98,27 +98,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6197752063004091577, guid: 0a595d0bc9e199b4e870fd94dae3d484, type: 3}
       propertyPath: m_fontSize
-      value: 20
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 6197752063004091577, guid: 0a595d0bc9e199b4e870fd94dae3d484, type: 3}
       propertyPath: m_fontColor.b
-      value: 0.7
+      value: 0.9245283
       objectReference: {fileID: 0}
     - target: {fileID: 6197752063004091577, guid: 0a595d0bc9e199b4e870fd94dae3d484, type: 3}
       propertyPath: m_fontColor.g
-      value: 0.7
+      value: 0.90236175
       objectReference: {fileID: 0}
     - target: {fileID: 6197752063004091577, guid: 0a595d0bc9e199b4e870fd94dae3d484, type: 3}
       propertyPath: m_fontColor.r
-      value: 0.7
+      value: 0.8285867
       objectReference: {fileID: 0}
     - target: {fileID: 6197752063004091577, guid: 0a595d0bc9e199b4e870fd94dae3d484, type: 3}
       propertyPath: m_fontSizeBase
-      value: 20
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 6197752063004091577, guid: 0a595d0bc9e199b4e870fd94dae3d484, type: 3}
       propertyPath: m_fontColor32.rgba
-      value: 4289901234
+      value: 4293715667
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

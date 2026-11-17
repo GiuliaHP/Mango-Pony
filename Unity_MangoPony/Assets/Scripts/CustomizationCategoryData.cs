@@ -14,7 +14,7 @@ public class CustomizationCategoryData : ScriptableObject
     public Sprite categoryIcon;
 
     [Tooltip("Point de vue caméra associé à cette catégorie")]
-    public CameraFocusZone cameraFocus = CameraFocusZone.FullBody;
+    public CameraFocusZone cameraFocus = CameraFocusZone.Fullbody;
 
     #endregion
 
@@ -86,10 +86,10 @@ public class CustomizationCategoryData : ScriptableObject
     
     public enum CameraFocusZone
     {
-        FullBody,
+        Fullbody,
         Head,
-        Hair,
-        Accessories
+        Legs,
+        Rump
     }
 
     [System.Serializable]

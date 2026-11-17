@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CustomizationCategoryData
   categoryName: Body
   categoryIcon: {fileID: 0}
+  cameraFocus: 1
   elements:
   - elementName: Body Type
     targetMeshSlot: 0
@@ -89,6 +90,49 @@ MonoBehaviour:
       - colorName: Nuance Color
         shaderPropertyName: _NuanceColor
         defaultColor: {r: 0.88, g: 0.78, b: 0.65, a: 1}
+  - elementName: Legs
+    targetMeshSlot: 2
+    targetMaterialZone: 3
+    supportsFourLegsSync: 0
+    shapesSubtitle: Shapes
+    defaultShapeIndex: 0
+    shapes:
+    - shapeName: Base
+      previewIcon: {fileID: 746843545963474028, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
+      meshPrefab: {fileID: 1366074872888762623, guid: e844a31857b9af946ac8965ce27f80b0, type: 3}
+    - shapeName: Slim
+      previewIcon: {fileID: -6783563537083282260, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
+      meshPrefab: {fileID: 3242820722354682607, guid: cf0d60b619571184fb7f7cc66ba809d5, type: 3}
+    - shapeName: Draft
+      previewIcon: {fileID: 8425432924880420005, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
+      meshPrefab: {fileID: 2724616053684178005, guid: 278756034beaead4783b3a1992c2e908, type: 3}
+    patternsSubtitle: Patterns
+    defaultPatternIndex: 0
+    patterns:
+    - patternName: None
+      previewIcon: {fileID: 2578623089327073496, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
+      patternTexture: {fileID: 0}
+    - patternName: Long Balzanne
+      previewIcon: {fileID: 91470800464861876, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
+      patternTexture: {fileID: 2800000, guid: 208d2344454b20e4290d143838736cc2, type: 3}
+    - patternName: Medium Balzanne
+      previewIcon: {fileID: -8279612462302189904, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
+      patternTexture: {fileID: 2800000, guid: cd842ff3d2001214a8a52f209fe7acf0, type: 3}
+    - patternName: Small Balzanne
+      previewIcon: {fileID: -4508226223089859040, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
+      patternTexture: {fileID: 2800000, guid: c4d3f50e96cbd784ab06e0cf97717821, type: 3}
+    - patternName: Crown
+      previewIcon: {fileID: 5132398212834887724, guid: 05512ccc78cf6bc49b2c9a2cd898bb33, type: 3}
+      patternTexture: {fileID: 2800000, guid: de52a5a8c83aa2b4588910be8805c67b, type: 3}
+    colorsSubtitle: Colors
+    colorSettings:
+      hasColors: 1
+      colorButtonPrefab: {fileID: 0}
+      colorPickerPrefab: {fileID: 0}
+      colorChannels:
+      - colorName: Leg Mark Color
+        shaderPropertyName: _LegMarkColor
+        defaultColor: {r: 0.98, g: 0.97, b: 0.95, a: 1}
   - elementName: Legs
     targetMeshSlot: 2
     targetMaterialZone: 3

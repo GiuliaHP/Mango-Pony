@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CustomizationCategoryData
   categoryName: Head
   categoryIcon: {fileID: 0}
-  cameraFocus: 1
+  cameraFocus: 2
   elements:
   - elementName: Head Shape
     targetMeshSlot: 1
